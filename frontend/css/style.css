@@ -1,0 +1,110 @@
+html{
+    background-color:#FFF;
+    width: 96%;
+    height: 100%;
+}
+body{
+    max-width: 1200px;
+    width:100%;
+    min-height: 60vh;
+    background-color:#007aff;
+    font-family: "Roboto";
+    color:#FFF;
+    padding:2%;
+    line-height: 1.2em;
+}
+
+h1,h2,h3{
+    padding:0.5em;
+    padding-left: 0;
+}
+h1{
+    font-size: 3em;
+    line-height: 1em;
+
+}
+h2{
+    font-size: 2em;
+    line-height: 1em;
+
+}
+h3{
+    font-size: 1.5em;
+    line-height: 1em;
+
+}
+
+input, button{
+    border-radius: 0;
+    padding:0.4em;
+    margin:0;
+    border:none;
+   width:30%;
+   font-size: 1.2em;
+
+}
+
+input{
+    background:none;
+    border:1px solid #007aff;
+    color:#007aff;
+}
+
+#label{
+    width: 20%;
+    display:inline-block;
+    text-align: right;
+}
+button{
+    background-color:#007aff;
+    color:#FFF;
+    width: 30%;
+    display: inline-block;
+}
+
+button:hover{
+    transform: scale(0.97);
+}
+
+a{
+    color:#FFF;
+    font-weight: bold;
+}
+a:visited{
+    color:#FFF;
+    font-weight: bold;
+}
+
+input:focus{
+    transform: scale(0.97);
+}
+
+
+main{
+    background-color:#FFF;
+    padding:1em;
+    color:#007aff;
+    margin:1em;
+    font-size: 1.2em;
+}
+main a{
+    color:#007aff;
+}
+
+footer{
+    font-size: 0.9em;
+}
+
+footer div{
+    padding:0.2em;
+}
+hr{
+    border:none;
+    height: 1px;
+    background-color:#FFF;
+}
+
+
+li{
+    display: block;
+}
