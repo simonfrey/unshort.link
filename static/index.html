@@ -15,22 +15,31 @@
 {{define "content"}}
     <div>
         <h3>Directly redirect</h3>
-        <div id="label">{{.ServerUrl}}/</div> <input type="url" id="urlDirect" placeholder="https://bit.ly/33kM5">            <button id="unshortDirectButton">Unshort & Redirect</button>
+        <div id="label">{{.ServerUrl}}/</div> <input type="url" id="urlDirect" placeholder="https://bit.ly/2PmsA00">            <button id="unshortDirectButton">Unshort & Redirect</button>
     </div>
     <div>
         <h3>Show the redirect url first</h3>
-        <div id="label">{{.ServerUrl}}/d/</div> <input type="url" id="urlShow" placeholder="https://bit.ly/23aWd2">            <button id="unshortShowButton">Unshort & Show</button>
+        <div id="label">{{.ServerUrl}}/d/</div> <input type="url" id="urlShow" placeholder="https://bit.ly/2PmsA00">            <button id="unshortShowButton">Unshort & Show</button>
     </div>
     <script>
         let buttonDirectElement = document.getElementById("unshortDirectButton");
         let urlDirectElement = document.getElementById("urlDirect");
         buttonDirectElement.addEventListener("click", function () {
-            window.location.href = "{{.ServerUrl}}/" + urlDirectElement.value;
+            if (urlDirectElement.value != ""){
+                window.location.href = "{{.ServerUrl}}/" + urlDirectElement.value;
+                return
+            }
+            window.location.href = "{{.ServerUrl}}/https://bit.ly/2PmsA00";
         });
         let buttonShowElement = document.getElementById("unshortShowButton");
         let urlShowElement = document.getElementById("urlShow");
         buttonShowElement.addEventListener("click", function () {
+            if (urlShowElement.value != ""){
             window.location.href = "{{.ServerUrl}}/d/" + urlShowElement.value;
+            return
+            }
+            window.location.href = "{{.ServerUrl}}/d/https://bit.ly/2PmsA00";
+
         });
     </script>
 {{end}}
