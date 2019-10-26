@@ -25,7 +25,7 @@ type TemplateVars struct {
 	LinkCount int
 }
 
-func HandleIndex(rw http.ResponseWriter, req *http.Request) {
+func HandleIndex(rw http.ResponseWriter) {
 	linkCount, err := GetLinkCount()
 	if err != nil {
 		HandleError(rw, errors.Wrap(err, "Could not get link count"))
@@ -45,7 +45,7 @@ func HandleIndex(rw http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func HandleShowRedirectPage(rw http.ResponseWriter, req *http.Request, url *UnShortUrl) {
+func HandleShowRedirectPage(rw http.ResponseWriter, url *UnShortUrl) {
 	err := renderTemplate(rw,
 		append(
 			_escFSMustByte(useLocal, "/static/show.html"),
@@ -58,7 +58,7 @@ func HandleShowRedirectPage(rw http.ResponseWriter, req *http.Request, url *UnSh
 		return
 	}
 }
-func HandleShowBlacklistPage(rw http.ResponseWriter, req *http.Request, url *UnShortUrl) {
+func HandleShowBlacklistPage(rw http.ResponseWriter, url *UnShortUrl) {
 	err := renderTemplate(rw,
 		append(
 			_escFSMustByte(useLocal, "/static/blacklist.html"),
@@ -124,12 +124,12 @@ func HandleUnShort(rw http.ResponseWriter, req *http.Request, redirect bool) {
 	logrus.Infof("Access url: '%v'", endUrl)
 
 	if endUrl.Blacklisted {
-		HandleShowBlacklistPage(rw, req, endUrl)
+		HandleShowBlacklistPage(rw, endUrl)
 		return
 	}
 
 	if !redirect {
-		HandleShowRedirectPage(rw, req, endUrl)
+		HandleShowRedirectPage(rw, endUrl)
 		return
 	}
 

@@ -24,7 +24,7 @@ func init() {
 func main() {
 	handler := func(rw http.ResponseWriter, req *http.Request) {
 		if req.URL.Path == "" || req.URL.Path == "/" || req.URL.Path == "/d/" || req.URL.Path == "/d" {
-			HandleIndex(rw, req)
+			HandleIndex(rw)
 			return
 		}
 		if strings.HasPrefix(req.URL.Path, "/d/") {
