@@ -49,3 +49,11 @@ func SaveUrlToDB(url UnShortUrl) error {
 
 	return nil
 }
+
+func GetLinkCount() (int, error) {
+	stats, err := db.Stats()
+	if err != nil {
+		return -1, errors.Wrap(err, "Could not get url from db")
+	}
+	return stats.Keys, nil
+}

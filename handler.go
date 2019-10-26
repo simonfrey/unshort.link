@@ -21,18 +21,25 @@ type TemplateVars struct {
 	ShortUrl  string
 	LongUrl   string
 	Error     string
+	LinkCount int
 }
 
 func HandleIndex(rw http.ResponseWriter, req *http.Request) {
-	err := renderTemplate(rw,
+	linkCount, err := GetLinkCount()
+	if err != nil {
+		HandleError(rw, errors.Wrap(err, "Could not get link count"))
+		return
+	}
+
+	err = renderTemplate(rw,
 		append(
 			_escFSMustByte(useLocal, "/static/index.html"),
 			_escFSMustByte(useLocal, "/static/main.html")...,
 		),
-		TemplateVars{ServerUrl: serveUrl},
+		TemplateVars{ServerUrl: serveUrl, LinkCount: linkCount},
 	)
 	if err != nil {
-		HandleError(rw, err)
+		HandleError(rw, errors.Wrap(err, "Could not render template"))
 		return
 	}
 }
