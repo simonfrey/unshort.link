@@ -1,0 +1,14 @@
+{{define "header"}}
+    <h1>Blacklisted</h1>
+    <div>
+        The short url {{.ShortUrl}} redirects to a blacklisted host. Do you really want to continue to that url?
+    </div>
+{{end}}
+{{define "content"}}
+    <div>
+        <h3>Continue</h3>
+       <a href="{{.LongUrl}}">Continue to "{{.LongUrl}}"</a>
+    </div>
+{{end}}
+{{ define "footer" }}
+{{end}}

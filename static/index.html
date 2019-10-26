@@ -1,0 +1,39 @@
+{{define "header"}}
+    <h1>Unshort.link - Free Link unshorten services</h1>
+    <h2>Prevent short link services from tracking you</h2>
+        <div>
+    Unshort.link inteligently removes tracking from short urls with three different methods:
+    <ol>
+        <li>1) Access the short url for you and get the proper long url. No cookies will be set at your devices
+        </li>
+        <li>2) Remove known tracking parameters from the urls</li>
+        <li>3) Find the minimal set of url parameters needed for the same results for removing currently unknown
+            parameters</li>
+    </ol>
+        </div>
+{{end}}
+{{define "content"}}
+    <div>
+        <h3>Directly redirect</h3>
+        <div id="label">{{.ServerUrl}}/</div> <input type="url" id="urlDirect" placeholder="https://bit.ly/33kM5">            <button id="unshortDirectButton">Unshort & Redirect</button>
+    </div>
+    <div>
+        <h3>Show the redirect url first</h3>
+        <div id="label">{{.ServerUrl}}/d/</div> <input type="url" id="urlShow" placeholder="https://bit.ly/23aWd2">            <button id="unshortShowButton">Unshort & Show</button>
+    </div>
+    <script>
+        let buttonDirectElement = document.getElementById("unshortDirectButton");
+        let urlDirectElement = document.getElementById("urlDirect");
+        buttonDirectElement.addEventListener("click", function () {
+            window.location.href = "{{.ServerUrl}}/" + urlDirectElement.value;
+        });
+        let buttonShowElement = document.getElementById("unshortShowButton");
+        let urlShowElement = document.getElementById("urlShow");
+        buttonShowElement.addEventListener("click", function () {
+            window.location.href = "{{.ServerUrl}}/d/" + urlShowElement.value;
+        });
+    </script>
+{{end}}
+{{ define "footer" }}
+    Supports TinyURL, Bit.ly, Tiny.cc, T.co, Goo.gl and many more. Just give it a try.<br>Example urls: <a href="https://bit.ly/2W8ZKBx">https://bit.ly/2W8ZKBx</a>, <a href="https://ai6.net/glB8hb">https://ai6.net/glB8hb</a>, <a href="http://tiny.cc/ihm1ez">http://tiny.cc/ihm1ez</a>
+{{end}}

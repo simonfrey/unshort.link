@@ -7,7 +7,7 @@ import (
 )
 
 var serveUrl string
-
+var useLocal = true
 func init() {
 	serveUrl = "http://localhost:8080/"
 }
@@ -26,6 +26,7 @@ func main() {
 		HandleUnShort(rw, req, true)
 	}
 
+	http.Handle("/static/", http.FileServer(_escFS(useLocal)))
 	http.HandleFunc("/", handler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

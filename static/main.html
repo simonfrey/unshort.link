@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Unshort.link</title>
+    <link href="/static/css/reset.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header>
+        {{template  "header" .}}
+    </header>
+    <main>
+    {{ template "content" .}}
+    </main>
+    <footer>
+        <div>{{ template "footer" .}}</div>
+        <hr>
+        <div>For being able to faster redirect we do cache the short links and their targets. No personal information about you will be stored alongside that!<br>
+            This project is 100% open source (GPL v3). If you want you can host it yourself: <a
+                    href="https://github.com/simonfrey/unshort.link">Github</a></div>
+    </footer>
+</body>
+</html>
