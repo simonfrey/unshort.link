@@ -6,10 +6,15 @@ import (
 	"strings"
 )
 
-var serveUrl string
+//go:generate go get -u github.com/programmfabrik/esc
+//go:generate esc -private -local-prefix-cwd -pkg=main -o=static.go static/ blacklist.txt
+
+var serveUrl, port string
 var useLocal = true
+
 func init() {
-	serveUrl = "http://localhost:8080/"
+	serveUrl = "http://localhost:8080"
+	port = "8080"
 }
 
 func main() {
@@ -28,5 +33,5 @@ func main() {
 
 	http.Handle("/static/", http.FileServer(_escFS(useLocal)))
 	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

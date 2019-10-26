@@ -10,9 +10,6 @@ import (
 	"strings"
 )
 
-//go:generate go get -u github.com/programmfabrik/esc
-//go:generate esc -private -local-prefix-cwd -pkg=main -o=static.go static/
-
 var schemeReplacer *strings.Replacer
 
 func init() {
@@ -21,9 +18,9 @@ func init() {
 
 type TemplateVars struct {
 	ServerUrl string
-	ShortUrl string
-	LongUrl string
-	Error string
+	ShortUrl  string
+	LongUrl   string
+	Error     string
 }
 
 func HandleIndex(rw http.ResponseWriter, req *http.Request) {
@@ -34,7 +31,7 @@ func HandleIndex(rw http.ResponseWriter, req *http.Request) {
 		),
 		TemplateVars{ServerUrl: serveUrl},
 	)
-	if err != nil{
+	if err != nil {
 		HandleError(rw, err)
 		return
 	}
@@ -46,9 +43,9 @@ func HandleShowRedirectPage(rw http.ResponseWriter, req *http.Request, url *UnSh
 			_escFSMustByte(useLocal, "/static/show.html"),
 			_escFSMustByte(useLocal, "/static/main.html")...,
 		),
-		TemplateVars{LongUrl: url.LongUrl.String(),ShortUrl:url.ShortUrl.String()},
+		TemplateVars{LongUrl: url.LongUrl.String(), ShortUrl: url.ShortUrl.String()},
 	)
-	if err != nil{
+	if err != nil {
 		HandleError(rw, err)
 		return
 	}
@@ -59,16 +56,16 @@ func HandleShowBlacklistPage(rw http.ResponseWriter, req *http.Request, url *UnS
 			_escFSMustByte(useLocal, "/static/blacklist.html"),
 			_escFSMustByte(useLocal, "/static/main.html")...,
 		),
-		TemplateVars{LongUrl: url.LongUrl.String(),ShortUrl:url.ShortUrl.String()},
+		TemplateVars{LongUrl: url.LongUrl.String(), ShortUrl: url.ShortUrl.String()},
 	)
-	if err != nil{
+	if err != nil {
 		HandleError(rw, err)
 		return
 	}
 }
 
 func HandleError(rw http.ResponseWriter, err error) {
-		fmt.Fprintf(rw,"An error occured: %s",err)
+	fmt.Fprintf(rw, "An error occured: %s", err)
 }
 
 func renderTemplate(rw io.Writer, templateBytes []byte, vars TemplateVars) error {
@@ -92,7 +89,7 @@ func HandleUnShort(rw http.ResponseWriter, req *http.Request, redirect bool) {
 	baseUrl = strings.TrimPrefix(baseUrl, "/")
 
 	myUrl, err := url.Parse(baseUrl)
-	if err != nil{
+	if err != nil {
 		HandleError(rw, err)
 		return
 	}
@@ -101,7 +98,7 @@ func HandleUnShort(rw http.ResponseWriter, req *http.Request, redirect bool) {
 	endUrl, err := GetUrlFromDB(myUrl)
 	if err != nil {
 		endUrl, err = GetUrl(myUrl)
-		if err != nil{
+		if err != nil {
 			HandleError(rw, err)
 			return
 		}
