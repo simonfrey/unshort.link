@@ -24,7 +24,7 @@ type UnShortUrl struct {
 	Blacklisted bool
 }
 
-func GetUrlFromDB(shortUrl *url.URL) (*UnShortUrl, error) {
+func getUrlFromDB(shortUrl *url.URL) (*UnShortUrl, error) {
 	val, err := db.Get([]byte(shortUrl.String()))
 	if err != nil {
 		return nil, errors.Wrap(err, "Could not get url from db")
@@ -37,7 +37,7 @@ func GetUrlFromDB(shortUrl *url.URL) (*UnShortUrl, error) {
 	return un, nil
 }
 
-func SaveUrlToDB(url UnShortUrl) error {
+func saveUrlToDB(url UnShortUrl) error {
 	urlJson, err := json.Marshal(url)
 	if err != nil {
 		return errors.Wrap(err, "Could not marshal url to json")
@@ -50,7 +50,7 @@ func SaveUrlToDB(url UnShortUrl) error {
 	return nil
 }
 
-func GetLinkCount() (int, error) {
+func getLinkCount() (int, error) {
 	stats, err := db.Stats()
 	if err != nil {
 		return -1, errors.Wrap(err, "Could not get url from db")

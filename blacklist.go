@@ -16,7 +16,7 @@ func init() {
 	sort.Strings(blacklist)
 }
 
-func HostIsInBlacklist(host string) bool {
+func hostIsInBlacklist(host string) bool {
 	i := sort.Search(len(blacklist), func(i int) bool { return host <= blacklist[i] })
 	if i < len(blacklist) && blacklist[i] == host {
 		return true

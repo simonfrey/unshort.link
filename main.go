@@ -24,15 +24,15 @@ func init() {
 func main() {
 	handler := func(rw http.ResponseWriter, req *http.Request) {
 		if req.URL.Path == "" || req.URL.Path == "/" || req.URL.Path == "/d/" || req.URL.Path == "/d" {
-			HandleIndex(rw)
+			handleIndex(rw)
 			return
 		}
 		if strings.HasPrefix(req.URL.Path, "/d/") {
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/d")
-			HandleUnShort(rw, req, false)
+			handleUnShort(rw, req, false)
 			return
 		}
-		HandleUnShort(rw, req, true)
+		handleUnShort(rw, req, true)
 	}
 
 	http.Handle("/static/", http.FileServer(_escFS(useLocal)))

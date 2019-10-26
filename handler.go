@@ -25,10 +25,10 @@ type TemplateVars struct {
 	LinkCount int
 }
 
-func HandleIndex(rw http.ResponseWriter) {
-	linkCount, err := GetLinkCount()
+func handleIndex(rw http.ResponseWriter) {
+	linkCount, err := getLinkCount()
 	if err != nil {
-		HandleError(rw, errors.Wrap(err, "Could not get link count"))
+		handleError(rw, errors.Wrap(err, "Could not get link count"))
 		return
 	}
 
@@ -40,12 +40,12 @@ func HandleIndex(rw http.ResponseWriter) {
 		TemplateVars{ServerUrl: serveUrl, LinkCount: linkCount},
 	)
 	if err != nil {
-		HandleError(rw, errors.Wrap(err, "Could not render template"))
+		handleError(rw, errors.Wrap(err, "Could not render template"))
 		return
 	}
 }
 
-func HandleShowRedirectPage(rw http.ResponseWriter, url *UnShortUrl) {
+func handleShowRedirectPage(rw http.ResponseWriter, url *UnShortUrl) {
 	err := renderTemplate(rw,
 		append(
 			_escFSMustByte(useLocal, "/static/show.html"),
@@ -54,11 +54,11 @@ func HandleShowRedirectPage(rw http.ResponseWriter, url *UnShortUrl) {
 		TemplateVars{LongUrl: url.LongUrl.String(), ShortUrl: url.ShortUrl.String()},
 	)
 	if err != nil {
-		HandleError(rw, err)
+		handleError(rw, err)
 		return
 	}
 }
-func HandleShowBlacklistPage(rw http.ResponseWriter, url *UnShortUrl) {
+func handleShowBlacklistPage(rw http.ResponseWriter, url *UnShortUrl) {
 	err := renderTemplate(rw,
 		append(
 			_escFSMustByte(useLocal, "/static/blacklist.html"),
@@ -67,12 +67,12 @@ func HandleShowBlacklistPage(rw http.ResponseWriter, url *UnShortUrl) {
 		TemplateVars{LongUrl: url.LongUrl.String(), ShortUrl: url.ShortUrl.String()},
 	)
 	if err != nil {
-		HandleError(rw, err)
+		handleError(rw, err)
 		return
 	}
 }
 
-func HandleError(rw http.ResponseWriter, err error) {
+func handleError(rw http.ResponseWriter, err error) {
 	fmt.Fprintf(rw, "An error occured: %s", err)
 }
 
@@ -91,45 +91,45 @@ func renderTemplate(rw io.Writer, templateBytes []byte, vars TemplateVars) error
 	return nil
 }
 
-func HandleUnShort(rw http.ResponseWriter, req *http.Request, redirect bool) {
+func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect bool) {
 	baseUrl := strings.TrimPrefix(req.URL.String(), serveUrl)
 	baseUrl = schemeReplacer.Replace(baseUrl)
 	baseUrl = strings.TrimPrefix(baseUrl, "/")
 
 	myUrl, err := url.Parse(baseUrl)
 	if err != nil {
-		HandleError(rw, err)
+		handleError(rw, err)
 		return
 	}
 
 	//Check in DB
-	endUrl, err := GetUrlFromDB(myUrl)
+	endUrl, err := getUrlFromDB(myUrl)
 	if err != nil {
 		logrus.Infof("Get new url from short link: '%s'", myUrl.String())
 
-		endUrl, err = GetUrl(myUrl)
+		endUrl, err = getUrl(myUrl)
 		if err != nil {
-			HandleError(rw, err)
+			handleError(rw, err)
 			return
 		}
 
 		// Check for blacklist
-		if HostIsInBlacklist(endUrl.LongUrl.Host) {
+		if hostIsInBlacklist(endUrl.LongUrl.Host) {
 			endUrl.Blacklisted = true
 		}
 
 		// Save to db
-		err = SaveUrlToDB(*endUrl)
+		err = saveUrlToDB(*endUrl)
 	}
 	logrus.Infof("Access url: '%v'", endUrl)
 
 	if endUrl.Blacklisted {
-		HandleShowBlacklistPage(rw, endUrl)
+		handleShowBlacklistPage(rw, endUrl)
 		return
 	}
 
 	if !redirect {
-		HandleShowRedirectPage(rw, endUrl)
+		handleShowRedirectPage(rw, endUrl)
 		return
 	}
 
