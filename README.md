@@ -38,9 +38,9 @@ be up and running
 
 ### Available configuration flags
 
-- `--url`: Set the url of the server you are running on (this is only required for the frontend)
-- `--port`: Port to start the server on
-- `--local`: Use the assets (frontend & blacklist) directly from the filesystem instead of the internal binary storage. This helps during the development of the frontend as you do not have to do `go generate ./...` after every change. This should not be used in production.
+- `--url`: Set the url of the server you are running on (this is only required for the frontend) (Default: `http://localhost:8080`)
+- `--port`: Port to start the server on (Default: `8080`)
+- `--local`: Use the assets (frontend & blacklist) directly from the filesystem instead of the internal binary storage. This helps during the development of the frontend as you do not have to do `go generate ./...` after every change. This should not be used in production. (Default: `false`)
 
 ## Contribution
 
