@@ -37,5 +37,7 @@ func main() {
 
 	http.Handle("/static/", http.FileServer(_escFS(useLocal)))
 	http.HandleFunc("/", handler)
+
+	log.Printf("Run server on port '%s', with url '%s' and local assets is set to '%t'", port, serveUrl, useLocal)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
