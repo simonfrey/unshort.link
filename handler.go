@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/pkg/errors"
+	"github.com/sirupsen/logrus"
 	"html/template"
 	"io"
 	"net/http"
@@ -104,6 +105,8 @@ func HandleUnShort(rw http.ResponseWriter, req *http.Request, redirect bool) {
 	//Check in DB
 	endUrl, err := GetUrlFromDB(myUrl)
 	if err != nil {
+		logrus.Infof("Get new url from short link: '%s'", myUrl.String())
+
 		endUrl, err = GetUrl(myUrl)
 		if err != nil {
 			HandleError(rw, err)
@@ -118,6 +121,7 @@ func HandleUnShort(rw http.ResponseWriter, req *http.Request, redirect bool) {
 		// Save to db
 		err = SaveUrlToDB(*endUrl)
 	}
+	logrus.Infof("Access url: '%v'", endUrl)
 
 	if endUrl.Blacklisted {
 		HandleShowBlacklistPage(rw, req, endUrl)

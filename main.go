@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"log"
+	"github.com/sirupsen/logrus"
 	"net/http"
 	"strings"
 )
@@ -38,6 +38,7 @@ func main() {
 	http.Handle("/static/", http.FileServer(_escFS(useLocal)))
 	http.HandleFunc("/", handler)
 
-	log.Printf("Run server on port '%s', with url '%s' and local assets is set to '%t'", port, serveUrl, useLocal)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	logrus.Infof("Run server on port '%s', with url '%s' and local assets is set to '%t'", port, serveUrl, useLocal)
+
+	logrus.Fatal(http.ListenAndServe(":"+port, nil))
 }
