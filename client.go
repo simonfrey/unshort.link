@@ -80,7 +80,7 @@ func GetUrl(inUrl *url.URL) (*UnShortUrl, error) {
 		}
 	}
 
-	if !found{
+	if !found {
 		for _, v := range queryParams {
 			if rawQuery == "" {
 				rawQuery = rawQuery + v
@@ -140,7 +140,7 @@ func Combinations(set []string) (subsets Subsets) {
 		subsets = append(subsets, subset)
 	}
 
-	subsets = append(subsets,[]string{})
+	subsets = append(subsets, []string{})
 	sort.Sort(subsets)
 	return subsets
 }
