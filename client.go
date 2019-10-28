@@ -34,6 +34,14 @@ func getUrl(inUrl *url.URL) (*UnShortUrl, error) {
 		return nil, errors.Wrap(err, "Could not get original url")
 	}
 
+	if resp.Request.URL.Host != inUrl.Host {
+		// Redirect happened
+		err = addHost(inUrl.Host)
+		if err != nil {
+			return nil, errors.Wrap(err, "Could not add new redirect host")
+		}
+	}
+
 	queryParams := make([]string, 0)
 	for k, _ := range resp.Request.URL.Query() {
 		queryParams = append(queryParams, fmt.Sprintf("%s=%s", k, resp.Request.URL.Query().Get(k)))

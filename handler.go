@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
@@ -134,4 +136,16 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect bool) {
 	}
 
 	http.Redirect(rw, req, endUrl.LongUrl.String(), http.StatusPermanentRedirect)
+}
+
+func handleProviders(rw http.ResponseWriter) {
+	providers, err := getHosts()
+	if err != nil {
+		handleError(rw, errors.Wrap(err, "Could not get hosts from db"))
+	}
+	providersJSON, err := json.MarshalIndent(providers, "", " ")
+	if err != nil {
+		handleError(rw, errors.Wrap(err, "Could not unmarshal standard hosts"))
+	}
+	_, _ = io.Copy(rw, bytes.NewReader(providersJSON))
 }
