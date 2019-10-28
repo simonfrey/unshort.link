@@ -88,7 +88,7 @@ main{
     margin:1em;
     font-size: 1.2em;
 }
-main a{
+main a, main a:visited{
     color:#007aff;
 }
 
