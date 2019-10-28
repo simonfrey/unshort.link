@@ -2,7 +2,7 @@
     "description": "Prevent short link services from tracking you",
     "manifest_version": 2,
     "name": "Unshort.link - Free Link unshorten services",
-    "version": "1.0",
+    "version": "1.1",
     "permissions": [
       "webRequest",
       "webRequestBlocking",
@@ -11,7 +11,7 @@
 
   "author": "Simon Frey",
   "developer": {
-    "name": "Simon Freyn",
+    "name": "Simon Frey",
     "url": "https://simon-frey.eu/"
   },
 
