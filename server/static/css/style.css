@@ -109,3 +109,22 @@ hr{
 li{
     display: block;
 }
+header,footer{
+    background-color:#007aff;
+}
+
+#firefoxAddon{
+    z-index: -1;
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
+    padding:0.4em;
+    background-color:#FFF;
+    vertical-align: middle;
+    font-size: 2em;
+    color:#007aff;
+}
+
+#firefoxAddon img{
+    height:0.8em;
+}
