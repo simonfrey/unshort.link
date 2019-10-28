@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+//go:generate curl -o blacklist.txt https://hosts.ubuntu101.co.za/domains.list
 //go:generate go get -u github.com/programmfabrik/esc
 //go:generate esc -private -local-prefix-cwd -pkg=main -o=static.go static/ blacklist.txt
 

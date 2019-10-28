@@ -1,2 +1,3 @@
 db.bitcask
+blacklist.txt
 static.go
