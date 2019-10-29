@@ -131,7 +131,15 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 	}
 
 	if api {
-		jsoRes, err := json.MarshalIndent(endUrl, "", " ")
+		jsoRes, err := json.Marshal(struct {
+			ShortLink   string `json:"short_link"`
+			LongLink    string `json:"long_link"`
+			Blacklisted bool   `json:"blacklisted"`
+		}{
+			ShortLink:   endUrl.ShortUrl.String(),
+			LongLink:    endUrl.LongUrl.String(),
+			Blacklisted: endUrl.Blacklisted,
+		})
 		if err != nil {
 			handleError(rw, errors.Wrap(err, "Could not marshal json"))
 			return
