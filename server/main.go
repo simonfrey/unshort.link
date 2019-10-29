@@ -29,6 +29,9 @@ func main() {
 			return
 		}
 		if strings.HasPrefix(req.URL.Path, "/providers") {
+			rw.Header().Set("Access-Control-Allow-Origin", "*")
+			rw.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+			rw.Header().Set("Access-Control-Allow-Headers", "*")
 			handleProviders(rw)
 			return
 		}
