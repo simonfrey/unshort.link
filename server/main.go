@@ -32,12 +32,17 @@ func main() {
 			handleProviders(rw)
 			return
 		}
-		if strings.HasPrefix(req.URL.Path, "/d/") {
-			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/d")
-			handleUnShort(rw, req, false)
+		if strings.HasPrefix(req.URL.Path, "/api/") {
+			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/api")
+			handleUnShort(rw, req, false, true)
 			return
 		}
-		handleUnShort(rw, req, true)
+		if strings.HasPrefix(req.URL.Path, "/d/") {
+			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/d")
+			handleUnShort(rw, req, false, false)
+			return
+		}
+		handleUnShort(rw, req, true, false)
 	}
 
 	http.Handle("/static/", http.FileServer(_escFS(useLocal)))

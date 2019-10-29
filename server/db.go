@@ -32,9 +32,9 @@ func init() {
 }
 
 type UnShortUrl struct {
-	ShortUrl    url.URL
-	LongUrl     url.URL
-	Blacklisted bool
+	ShortUrl    url.URL `json:"short_url"`
+	LongUrl     url.URL `json:"long_url"`
+	Blacklisted bool    `json:"blacklisted"`
 }
 
 func getUrlFromDB(shortUrl *url.URL) (*UnShortUrl, error) {

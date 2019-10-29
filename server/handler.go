@@ -93,7 +93,7 @@ func renderTemplate(rw io.Writer, templateBytes []byte, vars TemplateVars) error
 	return nil
 }
 
-func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect bool) {
+func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool) {
 	baseUrl := strings.TrimPrefix(req.URL.String(), serveUrl)
 	baseUrl = schemeReplacer.Replace(baseUrl)
 	baseUrl = strings.TrimPrefix(baseUrl, "/")
@@ -127,6 +127,16 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect bool) {
 
 	if endUrl.Blacklisted {
 		handleShowBlacklistPage(rw, endUrl)
+		return
+	}
+
+	if api {
+		jsoRes, err := json.MarshalIndent(endUrl, "", " ")
+		if err != nil {
+			handleError(rw, errors.Wrap(err, "Could not marshal json"))
+			return
+		}
+		_, _ = io.Copy(rw, bytes.NewReader(jsoRes))
 		return
 	}
 
