@@ -6,14 +6,11 @@
     "permissions": [
       "webRequest",
       "webRequestBlocking",
-      "<all_urls>"
+      "activeTab"
     ],
 
   "author": "Simon Frey",
-  "developer": {
-    "name": "Simon Frey",
-    "url": "https://simon-frey.eu/"
-  },
+
 
   "icons": {
     "32": "icons/32.png",
