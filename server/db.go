@@ -88,7 +88,11 @@ func addHost(host string) error {
 func getHosts() ([]string, error) {
 	hosts := make([]string, 0)
 	err := db.Scan([]byte("host_"), func(key []byte) error {
-		hosts = append(hosts, strings.TrimPrefix(string(key), "host_"))
+		h := strings.TrimPrefix(string(key), "host_")
+		if h == "" {
+			return nil
+		}
+		hosts = append(hosts, h)
 		return nil
 	})
 	return hosts, err

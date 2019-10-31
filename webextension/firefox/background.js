@@ -4,6 +4,7 @@ var unshortPattern = "unshort.link";
 
 // Redirect services via unshort.link
 function redirect(requestDetails) {
+    console.log("Unshort: ",requestDetails.url)
     return {
         redirectUrl: "https://" + unshortPattern + "/d/" + requestDetails.url
     };
@@ -17,9 +18,13 @@ req.addEventListener("load", function () {
 
     let services = JSON.parse(req.response);
     services.forEach(function (item, index) {
+        if (item.length == 0){
+            return
+        }
         servicesUrls.push("*://" + item + "/*")
     });
 
+    console.log(servicesUrls)
 
     browser.webRequest.onBeforeRequest.addListener(
         redirect,
