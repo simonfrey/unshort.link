@@ -16,7 +16,7 @@ import (
 var schemeReplacer *strings.Replacer
 
 func init() {
-	schemeReplacer = strings.NewReplacer("https:/", "https://", "http:/", "http://")
+	schemeReplacer = strings.NewReplacer("https://", "https://", "http://", "http://", "https:/", "https://", "http:/", "http://")
 }
 
 type TemplateVars struct {
