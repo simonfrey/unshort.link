@@ -13,6 +13,7 @@ import (
 )
 
 var db *bitcask.Bitcask
+var providerBlacklist map[string]bool
 
 func init() {
 	var err error
@@ -28,6 +29,15 @@ func init() {
 		if err != nil {
 			log.Fatalf("Could not add host '%s': %s ", s.Text(), err)
 		}
+	}
+
+	providerBlacklist = map[string]bool{
+		"www.google.com":   true,
+		"google.com":       true,
+		"twitter.com":      true,
+		"www.twitter.com":  true,
+		"facebook.com":     true,
+		"www.facebook.com": true,
 	}
 }
 
@@ -90,6 +100,9 @@ func getHosts() ([]string, error) {
 	err := db.Scan([]byte("host_"), func(key []byte) error {
 		h := strings.TrimPrefix(string(key), "host_")
 		if h == "" {
+			return nil
+		}
+		if _, ok := providerBlacklist[h]; ok {
 			return nil
 		}
 		hosts = append(hosts, h)
