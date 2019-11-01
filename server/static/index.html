@@ -1,48 +1,45 @@
-{{define "header"}}
-    <h2>Prevent short link services from tracking you</h2>
-        <div>
-    Unshort.link inteligently removes tracking from short urls with three different methods:
-    <ol>
-        <li>1) Access the short url for you and get the proper long url. No cookies will be set at your devices
-        </li>
-        <li>2) Remove known tracking parameters from the urls</li>
-        <li>3) Find the minimal set of url parameters needed for the same results for removing currently unknown
-            parameters</li>
-    </ol>
-        </div>
+{{define "description"}}
+<h2>Prevent short link services from tracking you</h2>
+<div id="features">
+    <div><img src="/static/img/cookie.svg"><br>Remove cookies</div>
+    <div><img src="/static/img/search.svg"><br>Remove tracking parameters</div>
+    <div><img src="/static/img/warning.svg"><br>Check blacklist</div>
+</div>
 {{end}}
-{{define "content"}}
-    <div>
-        <h3>Directly redirect</h3>
-        <div id="label">{{.ServerUrl}}/</div> <input type="url" id="urlDirect" placeholder="https://bit.ly/2PmsA00">            <button id="unshortDirectButton">Unshort & Redirect</button>
-    </div>
-    <div>
-        <h3>Show the redirect url first</h3>
-        <div id="label">{{.ServerUrl}}/d/</div> <input type="url" id="urlShow" placeholder="https://bit.ly/2PmsA00">            <button id="unshortShowButton">Unshort & Show</button>
-    </div>
-    <script>
-        let buttonDirectElement = document.getElementById("unshortDirectButton");
-        let urlDirectElement = document.getElementById("urlDirect");
-        buttonDirectElement.addEventListener("click", function () {
-            if (urlDirectElement.value != ""){
-                window.location.href = "{{.ServerUrl}}/" + urlDirectElement.value;
-                return
-            }
-            window.location.href = "{{.ServerUrl}}/https://bit.ly/2PmsA00";
-        });
-        let buttonShowElement = document.getElementById("unshortShowButton");
-        let urlShowElement = document.getElementById("urlShow");
-        buttonShowElement.addEventListener("click", function () {
-            if (urlShowElement.value != ""){
-            window.location.href = "{{.ServerUrl}}/d/" + urlShowElement.value;
+{{define "action"}}
+<h3>Directly redirect</h3>
+<div class="form">
+    <input type="url" id="urlDirect"
+        placeholder="https://bit.ly/2PmsA00"> <button id="unshortDirectButton">Unshort &amp;
+        Redirect</button>
+</div>
+<h3>Show the redirect url first</h3>
+<div class="form">
+        <input type="url" id="urlShow"
+        placeholder="https://bit.ly/2PmsA00"> <button id="unshortShowButton">Unshort &amp; Show</button>
+</div>
+<script>
+    let buttonDirectElement = document.getElementById("unshortDirectButton");
+    let urlDirectElement = document.getElementById("urlDirect");
+    buttonDirectElement.addEventListener("click", function () {
+        if (urlDirectElement.value != "") {
+            window.location.href = "https:\/\/unshort.link/" + urlDirectElement.value;
             return
-            }
-            window.location.href = "{{.ServerUrl}}/d/https://bit.ly/2PmsA00";
+        }
+        window.location.href = "https:\/\/unshort.link/https://bit.ly/2PmsA00";
+    });
+    let buttonShowElement = document.getElementById("unshortShowButton");
+    let urlShowElement = document.getElementById("urlShow");
+    buttonShowElement.addEventListener("click", function () {
+        if (urlShowElement.value != "") {
+            window.location.href = "https:\/\/unshort.link/d/" + urlShowElement.value;
+            return
+        }
+        window.location.href = "https:\/\/unshort.link/d/https://bit.ly/2PmsA00";
 
-        });
-    </script>
+    });
+</script>
 {{end}}
-{{ define "footer" }}
-    <div>Supports TinyURL, Bit.ly, Tiny.cc, T.co, Goo.gl and many more. Just give it a try.<br>Example urls: <a href="https://bit.ly/2W8ZKBx">https://bit.ly/2W8ZKBx</a>, <a href="https://ai6.net/glB8hb">https://ai6.net/glB8hb</a>, <a href="http://tiny.cc/ihm1ez">http://tiny.cc/ihm1ez</a></div>
-    <div><i>Processed {{.LinkCount}} short links so far</i></div>
+{{ define "notes" }}
+<div>Supports TinyURL, Bit.ly, Tiny.cc, T.co, Goo.gl and many more </div>
 {{end}}

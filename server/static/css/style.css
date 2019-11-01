@@ -1,23 +1,20 @@
 html{
-    background-color:#007aff;
-    min-height: 100%;
-    height: 100%;
+    background-color:#fafafa;
+    color:#202020;
+    font-family: "Roboto";
+
+
 }
 body{
-    max-width: 1200px;
-	margin: 0 auto;
-    width:100%;
-    min-height: 100%;
-    height: 100%;
-    font-family: "Roboto";
-    color:#FFF;
-    padding:0 2%;
+   
     line-height: 1.2em;
 }
 
 h1,h2,h3{
     padding:0.5em;
     padding-left: 0;
+    width:100%;
+    text-align: center;
 }
 h1{
     font-size: 3em;
@@ -40,7 +37,6 @@ input, button{
     padding:0.4em;
     margin:0;
     border:none;
-   width:30%;
    font-size: 1.2em;
 
 }
@@ -51,16 +47,18 @@ input{
     color:#007aff;
 }
 
+.form{
+    display: flex;
+    justify-content: center;
+}
+
 #label{
-    width: 20%;
     display:inline-block;
     text-align: right;
 }
 button{
     background-color:#007aff;
     color:#FFF;
-    width: 30%;
-    display: inline-block;
 }
 
 button:hover{
@@ -68,11 +66,11 @@ button:hover{
 }
 
 a{
-    color:#FFF;
+    color:#000;
     font-weight: bold;
 }
 a:visited{
-    color:#FFF;
+    color:#000;
     font-weight: bold;
 }
 
@@ -80,24 +78,75 @@ input:focus{
     transform: scale(0.97);
 }
 
+#action{
 
-main{
     background-color:#FFF;
-    padding:1em;
     color:#007aff;
+    padding:1em;
     margin:1em;
+}
+
+#notes{
+    text-align: center;
+}
+
+main,footer{
     font-size: 1.2em;
+
+    max-width: 1200px;
+	margin: 0 auto;
+    width:96%;
+    padding:2%;
+}
+main{
+    min-height: 60vh;
 }
 main a, main a:visited{
     color:#007aff;
 }
 
+header{
+    width:100%;
+    text-align: left;
+    background-color:#007aff;
+    color:#FFF;
+    font-size: 1.2em;
+    padding:1em;
+}
+header >div{
+
+    max-width: 1200px;
+	margin: 0 auto;
+    width:100%;
+}
+header > div > div{
+    width:49%;
+    min-width: 300px;
+    display: inline-block;
+}
+
+header #plugins{
+    text-align: right;
+}
+header img, footer img{
+    height:1em;
+}
+
 footer{
     font-size: 0.9em;
+    height:3em;
+    text-align: center;
 }
 
 footer div{
+    display: inline-block;
     padding:0.2em;
+}
+
+footer #stats{
+    display: block;
+    width:100%;
+    text-align: center;
 }
 hr{
     border:none;
@@ -105,26 +154,31 @@ hr{
     background-color:#FFF;
 }
 
-
-li{
-    display: block;
-}
-header,footer{
-    background-color:#007aff;
+#features{
+    display: flex;
+    justify-content: center;
 }
 
-#firefoxAddon{
-    z-index: -1;
-    position: fixed;
-    bottom: 5px;
-    left: 5px;
-    padding:0.4em;
-    background-color:#FFF;
-    vertical-align: middle;
-    font-size: 2em;
-    color:#007aff;
+#features div{
+    text-align: center;
+    float: 1;
+    padding:1em;
 }
 
-#firefoxAddon img{
-    height:0.8em;
+#features div img{
+ height:3em;
+}
+
+
+#description img{
+    height:5em;
+    margin:auto;
+    display:block;
+    padding:1em;
+}
+
+#title a,#title a:visited{
+    color:#FFF;
+    text-decoration: none;
+    font-weight: normal;
 }

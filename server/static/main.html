@@ -2,29 +2,48 @@
 <html lang="en">
 
 <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
-    <title>Unshort.link</title>
+    <title>Unshort.link- Free link unshort service</title>
     <link href="/static/css/reset.css" rel="stylesheet" type="text/css">
     <link href="/static/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="prefetch">
 </head>
 
 <body>
     <header>
-        <h1>Unshort.link - Free Link unshorten services</h1>
-        {{template  "header" .}}
+        <div>
+            <div id="title"><a href="/"><img src="/static/img/logo.svg"> Unshort.link - Free Link unshorten service</a></div>
+            <div id="plugins">
+                Browser Plugins: <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><img src="/static/img/firefox.svg"></a> or <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><img
+                        src="/static/img/chrome.svg"></a>
+            </div>
+        </div>
     </header>
+
     <main>
-    {{ template "content" .}}
+        <div id="description">
+                {{template  "description" .}}
+        </div>
+        <div id="action">
+                {{ template "action" .}}
+        </div>
+        <div id="notes">
+            {{ template "notes" .}}
+        </div>
     </main>
     <footer>
-        <div>{{ template "footer" .}}</div>
-        <hr>
-        <div>For being able to faster redirect we do cache the short links and their targets. No personal information about you will be stored alongside that!<br>
-            This project is 100% open source (GPL v3). If you want you can host it yourself: <a
-                    href="https://github.com/simonfrey/unshort.link">Github</a></div>
-        <div>Firefox icon made by <a href="https://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha" rek="nofollow">Pixel Buddha</a><div>
-    </footer>
 
-<a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><div id="firefoxAddon"><img src="/static/img/firefox.svg"> Get firefox plugin</div></a>
+        <div><a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><img src="/static/img/firefox.svg">
+                Firefox plugin</a></div>
+        <div><a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><img src="/static/img/chrome.svg"> Chrome
+                plugin</a></div>
+        <div><a href="https://github.com/simonfrey/unshort.link/tree/master/server">Host it yourself</a></div>
+        <div><a href="https://github.com/simonfrey/unshort.link/blob/master/LICENSE.md">Open Source</a></div>
+        <div><a href="https://github.com/simonfrey/unshort.link/blob/master/icon_licenses.md">Icon licenses</a></div>
+        <div id="stats">213 links protected so far</div>
+
+    </footer>
 </body>
+
 </html>
