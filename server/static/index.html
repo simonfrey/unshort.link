@@ -10,13 +10,13 @@
 <h3>Directly redirect</h3>
 <div class="form">
     <input type="url" id="urlDirect"
-        placeholder="https://bit.ly/2PmsA00"> <button id="unshortDirectButton">Unshort &amp;
+        placeholder="https://tinyurl.com/yyy63fz9"> <button id="unshortDirectButton">Unshort &amp;
         Redirect</button>
 </div>
 <h3>Show the redirect url first</h3>
 <div class="form">
         <input type="url" id="urlShow"
-        placeholder="https://bit.ly/2PmsA00"> <button id="unshortShowButton">Unshort &amp; Show</button>
+        placeholder="https://tinyurl.com/yyy63fz9"> <button id="unshortShowButton">Unshort &amp; Show</button>
 </div>
 <script>
     let buttonDirectElement = document.getElementById("unshortDirectButton");
@@ -26,7 +26,7 @@
             window.location.href = "https:\/\/unshort.link/" + urlDirectElement.value;
             return
         }
-        window.location.href = "https:\/\/unshort.link/https://bit.ly/2PmsA00";
+        window.location.href = "https:\/\/unshort.link/https://tinyurl.com/yyy63fz9";
     });
     let buttonShowElement = document.getElementById("unshortShowButton");
     let urlShowElement = document.getElementById("urlShow");
@@ -35,7 +35,7 @@
             window.location.href = "https:\/\/unshort.link/d/" + urlShowElement.value;
             return
         }
-        window.location.href = "https:\/\/unshort.link/d/https://bit.ly/2PmsA00";
+        window.location.href = "https:\/\/unshort.link/d/https://tinyurl.com/yyy63fz9";
 
     });
 </script>
