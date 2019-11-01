@@ -13,9 +13,12 @@
 <body>
     <header>
         <div>
-            <div id="title"><a href="/"><img src="/static/img/logo.svg"> Unshort.link - Free Link unshorten service</a></div>
+            <div id="title"><a href="/"><img src="/static/img/logo.svg"> Unshort.link - Free Link unshorten service</a>
+            </div>
             <div id="plugins">
-                Browser Plugins: <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><img src="/static/img/firefox.svg"></a> or <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><img
+                Browser Plugins: <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><img
+                        src="/static/img/firefox.svg"></a> or <a
+                    href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><img
                         src="/static/img/chrome.svg"></a>
             </div>
         </div>
@@ -23,10 +26,10 @@
 
     <main>
         <div id="description">
-                {{template  "description" .}}
+            {{template  "description" .}}
         </div>
         <div id="action">
-                {{ template "action" .}}
+            {{ template "action" .}}
         </div>
         <div id="notes">
             {{ template "notes" .}}
@@ -36,13 +39,16 @@
 
         <div><a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><img src="/static/img/firefox.svg">
                 Firefox plugin</a></div>
-        <div><a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><img src="/static/img/chrome.svg"> Chrome
+        <div><a
+                href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><img
+                    src="/static/img/chrome.svg"> Chrome
                 plugin</a></div>
         <div><a href="https://github.com/simonfrey/unshort.link/tree/master/server">Host it yourself</a></div>
         <div><a href="https://github.com/simonfrey/unshort.link/blob/master/LICENSE.md">Open Source</a></div>
         <div><a href="https://github.com/simonfrey/unshort.link/blob/master/icon_licenses.md">Icon licenses</a></div>
-        <div id="stats">213 links protected so far</div>
-
+        {{ if .LinkCount}}
+        <div id="stats">{{.LinkCount}} links protected so far</div>
+        {{end}}
     </footer>
 </body>
 
