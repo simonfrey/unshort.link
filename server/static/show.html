@@ -2,7 +2,7 @@
 <h2>Redirect</h2>
 <img src="/static/img/internet.svg">
 <div>
-        You entered the short url {{.ShortUrl}}. Do you want to continue to its long url?
+        You entered the short url <a href="{{.ShortUrl}}">{{.ShortUrl}}</a>. Do you want to continue to its long url?
     </div>
 {{end}}
 {{define "action"}}
