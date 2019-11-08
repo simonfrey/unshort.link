@@ -57,7 +57,10 @@ func getUrl(inUrl *url.URL) (*UnShortUrl, error) {
 
 	rawQuery := ""
 	found := false
-	for _, v := range queryParamSet {
+	for k, v := range queryParamSet {
+		if k >= 50 {
+			break
+		}
 		tmQuery := ""
 		for _, v := range v {
 			if tmQuery == "" {
