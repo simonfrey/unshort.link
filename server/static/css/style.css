@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-
 :root {
     --color-1: #239bac;
     --color-2: #73d9e4;
@@ -11,7 +9,7 @@ html, body {
 }
 
 * {
-    font-family: 'Lato', sans-serif;
+    font-family: Tahoma, Geneva, sans-serif
 }
 
 div.top-banner {
@@ -64,7 +62,6 @@ div.link-form div.input-group {
 }
 
 div#action input[placeholder] {
-    width: 15em;
     flex: 1 1 auto;
 }
 
@@ -98,7 +95,13 @@ div.feature-element div.feature-icon {
     font-size: 4em;
 }
 
+div.feature-element div.feature-icon svg {
+    height: 38px;
+    width:  38px;
+}
+
 div.features div.feature-element h2 {
+    font-family: 'Lato Bold', sans-serif;
     font-weight: bold;
 }
 

@@ -5,10 +5,10 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <title>Unshort.link- Free link unshort service</title>
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/reset.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/style.css" rel="stylesheet" type="text/css">
-    <script src="https://kit.fontawesome.com/cb03664470.js" crossorigin="anonymous"></script>
+    <script src="./static/feather/feather.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./static/css/style.css">
     <link rel="prefetch">
 </head>
 
@@ -33,21 +33,21 @@
             <div class="row">
                 <div class="col-md-4 feature-element">
                     <div class="feature-icon">
-                        <i class="fas fa-cookie-bite"></i>
+                        <i data-feather="lock"></i>
                     </div>
                     <h2>Remove cookies</h2>
                     <p>Filter cookies that are used for tracking, to protect your anononimity.</p>
                 </div>
                 <div class="col-md-4 feature-element">
                     <div class="feature-icon">
-                        <i class="fas fa-user-shield"></i>
+                        <i data-feather="eye-off"></i>
                     </div>
                     <h2>Remove tracking</h2>
                     <p>Remove known tracking parameters from the URLs behind the short links.</p>
                 </div>
                 <div class="col-md-4 feature-element">
                     <div class="feature-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
+                        <i data-feather="x-circle"></i>
                     </div>
                     <h2>Check blacklist</h2>
                     <p>Check links against a blacklist to prevent access to a harmful website hidden behind a short link.</p>
@@ -59,32 +59,23 @@
         <div class="footer">
             <h3>More information</h3>
             <div class="footer-links">
-                <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/">
-                    <div class="footer-link">
-                        <i class="fab fa-fw fa-firefox"></i>
-                        <p>Extension</p>
-                    </div>
-                </a>
-                <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch">
-                    <div class="footer-link">
-                        <i class="fab fa-chrome"></i>
-                        <p>Extension</p>
-                    </div>
-                </a>
                 <a href="https://github.com/simonfrey/unshort.link/">
                     <div class="footer-link">
-                        <i class="fas fa-code-branch"></i>
+                        <i data-feather="git-branch"></i>
                         <p>Source code</p>
                     </div>
                 </a>
                 <a href="https://github.com/simonfrey/unshort.link/tree/master/LICENSE.md">
                     <div class="footer-link">
-                        <i class="fas fa-scroll"></i>
+                        <i data-feather="key"></i>
                         <p>License</p>
                     </div>
                 </a>
             </div>
         </div>
     </footer>
+    <script>
+        feather.replace()
+    </script>
 </body>
 </html>

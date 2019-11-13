@@ -1,8 +1,8 @@
 {{define "action"}}
-<div class="input-group input-group-lg">
-    <input type="text" class="form-control" id="urlDirect" placeholder="https://tinyurl.com/yyy63fz9">
-    <div class="input-group-btn">
-        <button class="btn btn-default" type="submit" id="unshortDirectButton">
+<div class="input-group input-group-lg mb-3">
+    <input type="text" class="form-control" id="urlDirect" placeholder="https://tinyurl.com/yyy63fz9" aria-label="unshort" aria-describedby="button-unshort">
+    <div class="input-group-append">
+        <button class="btn btn-primary" type="submit" id="unshortDirectButton button-unshort">
             unshorten
         </button>
     </div>
@@ -16,7 +16,7 @@
             return;
         }
         if(urlDirectElement.placeholder != "") {
-            window.location.href = "https:\/\/unshort.link/https://tinyurl.com/" + urlDirectElement.placeholder;
+            window.location.href = "https:\/\/unshort.link/" + urlDirectElement.placeholder;
             return;
         }
         window.location.href = "https:\/\/unshort.link/https://tinyurl.com/yyy63fz9";
