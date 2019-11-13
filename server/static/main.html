@@ -5,51 +5,86 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <title>Unshort.link- Free link unshort service</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="/static/css/reset.css" rel="stylesheet" type="text/css">
     <link href="/static/css/style.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/cb03664470.js" crossorigin="anonymous"></script>
     <link rel="prefetch">
 </head>
 
 <body>
     <header>
-        <div>
-            <div id="title"><a href="/"><img src="/static/img/logo.svg"> Unshort.link - Free Link unshorten service</a>
+        <div class="top-banner">
+            <h1 class="top-banner-title">unshort.link</h1>
+            <p class="top-banner-subtitle">Prevent short link services from tracking you.</p>
+
+            <div class="link-form" id="action">
+                {{ template "action" .}}
             </div>
-            <div id="plugins">
-                Browser Plugins: <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><img
-                        src="/static/img/firefox.svg"></a> or <a
-                    href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><img
-                        src="/static/img/chrome.svg"></a>
-            </div>
+
+            {{ if .LinkCount}}
+                <div id="stats" class="stats">{{.LinkCount}} links protected so far</div>
+            {{end}}
         </div>
     </header>
 
     <main>
-        <div id="description">
-            {{template  "description" .}}
-        </div>
-        <div id="action">
-            {{ template "action" .}}
-        </div>
-        <div id="notes">
-            {{ template "notes" .}}
+        <div class="features">
+            <div class="row">
+                <div class="col-md-4 feature-element">
+                    <div class="feature-icon">
+                        <i class="fas fa-cookie-bite"></i>
+                    </div>
+                    <h2>Remove cookies</h2>
+                    <p>Filter cookies that are used for tracking, to protect your anononimity.</p>
+                </div>
+                <div class="col-md-4 feature-element">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h2>Remove tracking</h2>
+                    <p>Remove known tracking parameters from the URLs behind the short links.</p>
+                </div>
+                <div class="col-md-4 feature-element">
+                    <div class="feature-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h2>Check blacklist</h2>
+                    <p>Check links against a blacklist to prevent access to a harmful website hidden behind a short link.</p>
+                </div>
+            </div>
         </div>
     </main>
     <footer>
-
-        <div><a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><img src="/static/img/firefox.svg">
-                Firefox plugin</a></div>
-        <div><a
-                href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><img
-                    src="/static/img/chrome.svg"> Chrome
-                plugin</a></div>
-        <div><a href="https://github.com/simonfrey/unshort.link/tree/master/server">Host it yourself</a></div>
-        <div><a href="https://github.com/simonfrey/unshort.link/blob/master/LICENSE.md">Open Source</a></div>
-        <div><a href="https://github.com/simonfrey/unshort.link/blob/master/icon_licenses.md">Icon licenses</a></div>
-        {{ if .LinkCount}}
-        <div id="stats">{{.LinkCount}} links protected so far</div>
-        {{end}}
+        <div class="footer">
+            <h3>More information</h3>
+            <div class="footer-links">
+                <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/">
+                    <div class="footer-link">
+                        <i class="fab fa-fw fa-firefox"></i>
+                        <p>Extension</p>
+                    </div>
+                </a>
+                <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch">
+                    <div class="footer-link">
+                        <i class="fab fa-chrome"></i>
+                        <p>Extension</p>
+                    </div>
+                </a>
+                <a href="https://github.com/simonfrey/unshort.link/">
+                    <div class="footer-link">
+                        <i class="fas fa-code-branch"></i>
+                        <p>Source code</p>
+                    </div>
+                </a>
+                <a href="https://github.com/simonfrey/unshort.link/tree/master/LICENSE.md">
+                    <div class="footer-link">
+                        <i class="fas fa-scroll"></i>
+                        <p>License</p>
+                    </div>
+                </a>
+            </div>
+        </div>
     </footer>
 </body>
-
 </html>
