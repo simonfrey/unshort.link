@@ -98,7 +98,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 	baseUrl = schemeReplacer.Replace(baseUrl)
 	baseUrl = strings.TrimPrefix(baseUrl, "/")
 
-	myUrl, err := url.Parse(baseUrl)
+	myUrl, err := url.ParseRequestURI(baseUrl)
 	if err != nil {
 		handleError(rw, err)
 		return

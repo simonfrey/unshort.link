@@ -184,12 +184,8 @@ func getWithRedirects(inUrl *url.URL, maxTries int) (res *http.Response, body []
 		if d == "" {
 			d = string(m[2])
 		}
-		u, err := url.Parse(d)
-		if err != nil {
-			return nil, nil, errors.Wrapf(err,
-				"Could not parse redirect url from meta '%s'", string(m[2]))
-		}
-		if maxTries > 0 {
+		u, err := url.ParseRequestURI(d)
+		if err == nil && u.Scheme != "" && u.Host != "" && maxTries > 0 {
 			return getWithRedirects(u, maxTries-1)
 		}
 	}
