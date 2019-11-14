@@ -6,6 +6,7 @@
 html, body {
     display: flex;
     flex-direction: column;
+    font-size: calc((12px + 0.4vw));
 }
 
 * {
@@ -14,6 +15,7 @@ html, body {
 
 div.top-banner {
     width: 100%;
+    height: 100vh;
     padding: 6rem 2rem;
 
     display: flex;
@@ -38,35 +40,31 @@ div.top-banner {
 
 .top-banner-title {
     font-weight: 500;
-    font-size: 3.5em;
+    font-size: 3.5rem;
     margin-block-start: 16px;
     margin-block-end: 16px;
 }
 
 .top-banner-subtitle {
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 
 div.link-form {
-    margin: 2em;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     width: 40%;
-}
+    min-width: 240px;
+    margin: 2rem;
 
-div.link-form div.input-group {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex: 1 1 auto;
 }
 
-div#action input[placeholder] {
-    flex: 1 1 auto;
+div.link-form * {
+    margin: 0.25rem 0;
 }
 
 div.stats {
-    font-size: 1.25em;
+    font-size: 1.25rem;
 }
 
 div.features {
@@ -76,7 +74,7 @@ div.features {
     align-items: center;
     flex: 1 1 auto;
 
-    margin: 3em 0em;
+    margin: 3rem 0;
 }
 
 div.features div.row {
@@ -88,16 +86,11 @@ div.features div.feature-element {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin: 3em 0em;
+    margin: 1rem 0;
 }
 
 div.feature-element div.feature-icon {
-    font-size: 4em;
-}
-
-div.feature-element div.feature-icon svg {
-    height: 38px;
-    width:  38px;
+    font-size: 3rem;
 }
 
 div.features div.feature-element h2 {
@@ -106,14 +99,13 @@ div.features div.feature-element h2 {
 }
 
 div.features div.feature-element p {
-    font-size: 1.25em;
+    font-size: 1.25rem;
     width: 80%;
 }
 
 div.footer {
     display: flex;
     flex-direction: column;
-    height: 10vh;
     flex: 1 1 auto;
 
     justify-content: center;
@@ -127,9 +119,7 @@ div.footer-links {
 }
 
 div.footer-link {
-    margin: 0.5em;
-    width: 8em;
-    height: 8em;
+    margin: 0.5rem;
 
     display: flex;
     flex-direction: column;
@@ -149,8 +139,13 @@ a:hover div.footer-link * {
 }
 
 div.footer-link i {
-    font-size: 3em;
+    font-size: 1.75rem;
     margin-top: 10px;
+}
+
+div.footer-links.row div {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 @-webkit-keyframes gradient-animation {
@@ -158,13 +153,54 @@ div.footer-link i {
     50%{background-position:100% 60%}
     100%{background-position:0% 41%}
 }
+
 @-moz-keyframes gradient-animation {
     0%{background-position:0% 41%}
     50%{background-position:100% 60%}
     100%{background-position:0% 41%}
 }
+
 @keyframes gradient-animation {
     0%{background-position:0% 41%}
     50%{background-position:100% 60%}
     100%{background-position:0% 41%}
+}
+
+@media screen and (max-width: 555px) {
+    div.footer-links.row div {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width: 556px) {
+    div.top-banner {
+        height: initial;
+    }
+
+    div#action input[placeholder] {
+        flex: 1 1 auto;
+    }
+
+    div.link-form {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    div.link-form * {
+        margin: 0 0.25rem;
+    }
+
+    div.features div.feature-element {
+        margin: 2rem 0;
+    }
+
+    div.footer {
+        height: 10vh;
+    }
+
+    div.footer-link {
+        width: 8rem;
+        height: 8rem;
+    }
 }

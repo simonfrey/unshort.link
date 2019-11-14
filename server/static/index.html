@@ -1,12 +1,8 @@
 {{define "action"}}
-<div class="input-group input-group-lg mb-3">
-    <input type="text" class="form-control" id="urlDirect" placeholder="https://tinyurl.com/yyy63fz9" aria-label="unshort" aria-describedby="button-unshort">
-    <div class="input-group-append">
-        <button class="btn btn-primary" type="submit" id="unshortDirectButton button-unshort">
-            unshorten
-        </button>
-    </div>
-</div>
+<input type="text" class="form-control" id="urlDirect" placeholder="https://tinyurl.com/yyy63fz9" aria-label="Unshort">
+<button class="btn btn-primary" type="submit" id="unshortDirectButton">
+    unshorten
+</button>
 <script>
     let buttonDirectElement = document.getElementById("unshortDirectButton");
     let urlDirectElement = document.getElementById("urlDirect");
