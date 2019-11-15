@@ -63,7 +63,7 @@ func getUrl(inUrl *url.URL) (*UnShortUrl, error) {
 	breakCtx, cancelFunc := context.WithTimeout(context.Background(), 5*time.Second)
 	rateLimitChan := make(chan bool, 2)
 	for k, parameters := range queryParamSet {
-		if k >= 60 {
+		if k >= 20 {
 			break
 		}
 
