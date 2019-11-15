@@ -68,9 +68,9 @@ func getUrl(inUrl *url.URL) (*UnShortUrl, error) {
 			break
 		}
 
+		rateLimitChan <- true
 		wg.Add(1)
 		go func(v []string) {
-			rateLimitChan <- true
 			defer func() {
 				wg.Done()
 				<-rateLimitChan
