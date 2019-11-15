@@ -1,14 +1,17 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/pkg/errors"
+	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"regexp"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -20,7 +23,7 @@ var (
 
 func init() {
 	hClient = http.Client{
-		Timeout: 10 * time.Second,
+		Timeout: 3 * time.Second,
 	}
 
 	metaRedirectRegex = regexp.MustCompile(`<.*?(?:(?:http-equiv="refresh".*?content=".*?(?:url|URL)=(.*?)")|(?:content=".*?(?:url|URL)=(.*?)".*?http-equiv="refresh")).*?>`)
@@ -55,42 +58,67 @@ func getUrl(inUrl *url.URL) (*UnShortUrl, error) {
 
 	queryParamSet := combinations(queryParams)
 
-	rawQuery := ""
-	found := false
-	for k, v := range queryParamSet {
-		if k >= 50 {
+	wg := sync.WaitGroup{}
+	foundChan := make(chan string)
+	breakCtx, cancelFunc := context.WithCancel(context.Background())
+	for k, parameters := range queryParamSet {
+		if k >= 60 {
 			break
 		}
-		tmQuery := ""
-		for _, v := range v {
-			if tmQuery == "" {
-				tmQuery = tmQuery + v
-				continue
+
+		wg.Add(1)
+		go func(v []string) {
+			defer wg.Done()
+			tmQuery := ""
+			for _, v := range v {
+				if tmQuery == "" {
+					tmQuery = tmQuery + v
+					continue
+				}
+				tmQuery = tmQuery + "&" + v
 			}
-			tmQuery = tmQuery + "&" + v
-		}
 
-		tmpUrl := *inUrl
-		tmpUrl.RawQuery = tmQuery
+			tmpUrl := *inUrl
+			tmpUrl.RawQuery = tmQuery
 
-		tmpResp, err := hClient.Get(tmpUrl.String())
-		if err != nil {
-			return nil, errors.Wrap(err, "Could not get tmp url")
-		}
+			req, err := http.NewRequestWithContext(breakCtx, "GET", tmpUrl.String(), nil)
+			if err != nil {
+				logrus.Error(errors.Wrapf(err, "Could not create new request for url '%s'", tmpUrl.String()))
+				return
+			}
+			tmpResp, err := hClient.Do(req)
+			if err != nil {
+				logrus.Error(errors.Wrapf(err, "Could not get tmp url '%s'", tmpUrl.String()))
+				return
+			}
 
-		tmpBody, err := ioutil.ReadAll(tmpResp.Body)
-		if err != nil {
-			return nil, errors.Wrap(err, "Could not read tmp body")
-		}
+			tmpBody, err := ioutil.ReadAll(tmpResp.Body)
+			if err != nil {
+				logrus.Error(errors.Wrapf(err, "Could not read tmp body for url '%s'", tmpUrl.String()))
+				return
+			}
 
-		if textEquality(string(baseBody), string(tmpBody)) > 0.6 {
-			rawQuery = tmQuery
-			found = true
-			break
-		}
+			if textEquality(string(baseBody), string(tmpBody)) > 0.6 {
+				foundChan <- tmQuery
+			}
+		}(parameters)
 	}
 
-	if !found {
+	waitChan := make(chan bool)
+	go func() {
+		wg.Wait()
+		waitChan <- true
+	}()
+
+	rawQuery := ""
+	select {
+	case q := <-foundChan:
+		rawQuery = q
+	case <-waitChan:
+	}
+	cancelFunc()
+
+	if rawQuery == "" {
 		for _, v := range queryParams {
 			if rawQuery == "" {
 				rawQuery = rawQuery + v
