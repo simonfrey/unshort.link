@@ -1,0 +1,14 @@
+i[class *= "icon"] {
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	background-size: 48px 48px;
+}
+
+i.icon-cookie  { background-image: url(/static/icons/cookie-bite.svg); }
+i.icon-shield  { background-image: url(/static/icons/user-shield.svg); }
+i.icon-warning { background-image: url(/static/icons/exclamation-triangle.svg); }
+i.icon-scroll  { background-image: url(/static/icons/scroll.svg); }
+i.icon-branch  { background-image: url(/static/icons/code-branch.svg); }
+i.icon-firefox { background-image: url(/static/icons/firefox.svg); }
+i.icon-chrome  { background-image: url(/static/icons/chrome.svg); }
