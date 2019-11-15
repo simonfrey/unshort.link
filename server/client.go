@@ -60,7 +60,7 @@ func getUrl(inUrl *url.URL) (*UnShortUrl, error) {
 
 	wg := sync.WaitGroup{}
 	foundChan := make(chan string)
-	breakCtx, cancelFunc := context.WithCancel(context.Background())
+	breakCtx, cancelFunc := context.WithTimeout(context.Background(), 5*time.Second)
 	rateLimitChan := make(chan bool, 2)
 	for k, parameters := range queryParamSet {
 		if k >= 60 {
