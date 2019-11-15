@@ -81,11 +81,12 @@ func getUrl(inUrl *url.URL) (*UnShortUrl, error) {
 			tmpUrl := *inUrl
 			tmpUrl.RawQuery = tmQuery
 
-			req, err := http.NewRequestWithContext(breakCtx, "GET", tmpUrl.String(), nil)
+			req, err := http.NewRequest("GET", tmpUrl.String(), nil)
 			if err != nil {
 				logrus.Error(errors.Wrapf(err, "Could not create new request for url '%s'", tmpUrl.String()))
 				return
 			}
+			req = req.WithContext(breakCtx)
 			tmpResp, err := hClient.Do(req)
 			if err != nil {
 				logrus.Error(errors.Wrapf(err, "Could not get tmp url '%s'", tmpUrl.String()))
