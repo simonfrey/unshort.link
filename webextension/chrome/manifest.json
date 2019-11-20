@@ -6,11 +6,14 @@
     "permissions": [
       "webRequest",
       "webRequestBlocking",
-      "<all_urls>"
+      "<all_urls>",
+      "storage"
     ],
 
   "author": "Simon Frey",
-
+  "options_ui": {
+    "page": "options.html"
+  },
 
   "icons": {
     "32": "icons/32.png",
@@ -21,7 +24,7 @@
     "homepage_url": "https://github.com/simonfrey/unshort.link",
 
     "background": {
-      "scripts": ["background.js"]
+      "scripts": ["js/background.js"]
     }
   }
 

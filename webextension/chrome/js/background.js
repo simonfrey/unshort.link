@@ -1,6 +1,16 @@
 // Set unshort server
-var unshortPattern = "unshort.link";
+var unshortPattern = "https://unshort.link";
+var directRedirect = false;
 
+function loadOptions() {
+    function setData(result) {
+        unshortPattern = result.serverUrl || "https://unshort.link";
+        directRedirect = result.directRedirect || false;
+    }
+    chrome.storage.sync.get(["serverUrl","directRedirect"],setData);
+}
+
+loadOptions();
 
 // Redirect services via unshort.link
 function redirect(requestDetails) {
@@ -9,8 +19,13 @@ function redirect(requestDetails) {
         return
     }
     console.log("Unshort: ",requestDetails.url)
+    var p = "/d/"
+    if (directRedirect) {
+        console.log("direct redirect")
+        p = "/"
+    }
     return {
-        redirectUrl: unshortPattern + "/d/" + requestDetails.url
+        redirectUrl: unshortPattern + p + requestDetails.url
     };
 }
 
