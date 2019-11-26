@@ -27,31 +27,10 @@
             {{end}}
         </div>
     </header>
-
     <main>
         <div class="features">
             <div class="row">
-                <div class="col-lg-4 feature-element">
-                    <div class="feature-icon">
-                        <i class="icon-cookie"></i>
-                    </div>
-                    <h2>Remove cookies</h2>
-                    <p>Filter cookies that are used for tracking, to protect your anononimity.</p>
-                </div>
-                <div class="col-lg-4 feature-element">
-                    <div class="feature-icon">
-                        <i class="icon-shield"></i>
-                    </div>
-                    <h2>Remove tracking</h2>
-                    <p>Remove known tracking parameters from the URLs behind the short links.</p>
-                </div>
-                <div class="col-lg-4 feature-element">
-                    <div class="feature-icon">
-                        <i class="icon-warning"></i>
-                    </div>
-                    <h2>Check blacklist</h2>
-                    <p>Check links against a blacklist to prevent access to a harmful website hidden behind a short link.</p>
-                </div>
+                {{ template "description" .}}
             </div>
         </div>
     </main>
@@ -59,38 +38,7 @@
         <div class="footer">
             <h3>More information</h3>
             <div class="footer-links row">
-                <div class="col-sm-3">
-                    <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/">
-                        <div class="footer-link">
-                            <i class="icon-firefox"></i>
-                            <p>Extension</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3">
-                    <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch">
-                        <div class="footer-link">
-                            <i class="icon-chrome"></i>
-                            <p>Extension</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3">
-                    <a href="https://github.com/simonfrey/unshort.link/">
-                        <div class="footer-link">
-                            <i class="icon-branch"></i>
-                            <p>Source code</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3">
-                    <a href="https://github.com/simonfrey/unshort.link/tree/master/LICENSE.md">
-                        <div class="footer-link">
-                            <i class="icon-scroll"></i>
-                            <p>License</p>
-                        </div>
-                    </a>
-                </div>
+                {{ template "notes" .}}
             </div>
         </div>
     </footer>
