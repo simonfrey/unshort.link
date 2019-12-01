@@ -1,12 +1,28 @@
 {{define "description"}}
-<h2>Redirect</h2>
-<img src="/static/img/internet.svg">
-<div>
-        You entered the short url <a href="{{.ShortUrl}}">{{.ShortUrl}}</a>. Do you want to continue to its long url?
+<div class="redirect-container">
+    <div class="container flex-center" style="flex-direction: column; margin-bottom: 2rem">
+        <h2>Redirect</h2>
+        <i class="icon-globe"></i>
     </div>
+    <div style="text-align: center">
+        <p>You are about to redirect to<br>
+        <a href="{{.LongUrl}}">{{.LongUrl}}</a>
+        </p>
+
+        <p>Are you sure you want to redirect?</p>
+        <button class="btn btn-lg btn-primary" type="submit" id="buttonRedirect">
+        redirect
+        </button>
+        <script>
+            let buttonRedirect = document.getElementById("buttonRedirect");
+            buttonRedirect.addEventListener("click", function () {
+                window.location.href = "{{.LongUrl}}";
+            });
+        </script>
+    </div>
+</div>
 {{end}}
 {{define "action"}}
-<a href="{{.LongUrl}}">{{.LongUrl}}</a>
 {{end}}
 {{ define "notes" }}
 {{end}}

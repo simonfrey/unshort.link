@@ -22,57 +22,62 @@
 </div>
 {{end}}
 {{define "action"}}
-<input type="text" class="form-control" id="urlDirect" placeholder="https://tinyurl.com/yyy63fz9" aria-label="Unshort">
-<button class="btn btn-primary" type="submit" id="unshortDirectButton">
-    unshorten
-</button>
-<script>
-    let buttonDirectElement = document.getElementById("unshortDirectButton");
-    let urlDirectElement = document.getElementById("urlDirect");
-    buttonDirectElement.addEventListener("click", function () {
-        if (urlDirectElement.value != "") {
-            window.location.href = "https:\/\/unshort.link/" + urlDirectElement.value;
-            return;
-        }
-        if(urlDirectElement.placeholder != "") {
-            window.location.href = "https:\/\/unshort.link/" + urlDirectElement.placeholder;
-            return;
-        }
-        window.location.href = "https:\/\/unshort.link/https://tinyurl.com/yyy63fz9";
-    });
-</script>
+<div class="link-form" id="action">
+    <input type="text" class="form-control" id="urlDirect" placeholder="https://tinyurl.com/yyy63fz9" aria-label="Unshort">
+    <button class="btn btn-primary" type="submit" id="unshortDirectButton">
+        unshorten
+    </button>
+    <script>
+        let buttonDirectElement = document.getElementById("unshortDirectButton");
+        let urlDirectElement = document.getElementById("urlDirect");
+        buttonDirectElement.addEventListener("click", function () {
+            if (urlDirectElement.value != "") {
+                window.location.href = "https:\/\/unshort.link/" + urlDirectElement.value;
+                return;
+            }
+            if(urlDirectElement.placeholder != "") {
+                window.location.href = "https:\/\/unshort.link/" + urlDirectElement.placeholder;
+                return;
+            }
+            window.location.href = "https:\/\/unshort.link/https://tinyurl.com/yyy63fz9";
+        });
+    </script>
+</div>
 {{end}}
 {{define "notes"}}
-<div class="col-sm-3">
-    <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/">
-        <div class="footer-link">
-            <i class="icon-firefox"></i>
-            <p>Extension</p>
-        </div>
-    </a>
-</div>
-<div class="col-sm-3">
-    <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch">
-        <div class="footer-link">
-            <i class="icon-chrome"></i>
-            <p>Extension</p>
-        </div>
-    </a>
-</div>
-<div class="col-sm-3">
-    <a href="https://github.com/simonfrey/unshort.link/">
-        <div class="footer-link">
-            <i class="icon-branch"></i>
-            <p>Source code</p>
-        </div>
-    </a>
-</div>
-<div class="col-sm-3">
-    <a href="https://github.com/simonfrey/unshort.link/tree/master/LICENSE.md">
-        <div class="footer-link">
-            <i class="icon-scroll"></i>
-            <p>License</p>
-        </div>
-    </a>
+<h3>More information</h3>
+<div class="footer-links row">
+    <div class="col-sm-3">
+        <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/">
+            <div class="footer-link">
+                <i class="icon-firefox"></i>
+                <p>Extension</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-3">
+        <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch">
+            <div class="footer-link">
+                <i class="icon-chrome"></i>
+                <p>Extension</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-3">
+        <a href="https://github.com/simonfrey/unshort.link/">
+            <div class="footer-link">
+                <i class="icon-branch"></i>
+                <p>Source code</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-3">
+        <a href="https://github.com/simonfrey/unshort.link/tree/master/LICENSE.md">
+            <div class="footer-link">
+                <i class="icon-scroll"></i>
+                <p>License</p>
+            </div>
+        </a>
+    </div>
 </div>
 {{end}}

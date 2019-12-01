@@ -18,9 +18,7 @@
             <h1 class="top-banner-title">unshort.link</h1>
             <p class="top-banner-subtitle">Prevent short link services from tracking you.</p>
 
-            <div class="link-form" id="action">
-                {{ template "action" .}}
-            </div>
+            {{ template "action" .}}
 
             {{ if .LinkCount}}
                 <div id="stats" class="stats">{{.LinkCount}} links protected so far</div>
@@ -36,10 +34,7 @@
     </main>
     <footer>
         <div class="footer">
-            <h3>More information</h3>
-            <div class="footer-links row">
-                {{ template "notes" .}}
-            </div>
+            {{ template "notes" .}}
         </div>
     </footer>
 </body>

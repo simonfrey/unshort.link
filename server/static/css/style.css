@@ -204,3 +204,20 @@ div.footer-links.row div {
         height: 8rem;
     }
 }
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.redirect-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+div.redirect-container a {
+    font-size: 1.2rem;
+}
