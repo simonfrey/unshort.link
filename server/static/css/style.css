@@ -1,184 +1,223 @@
-html{
-    background-color:#fafafa;
-    color:#202020;
-    font-family: "Roboto";
-
-
-}
-body{
-   
-    line-height: 1.2em;
+:root {
+    --color-1: #239bac;
+    --color-2: #73d9e4;
 }
 
-h1,h2,h3{
-    padding:0.5em;
+html, body {
+    display: flex;
+    flex-direction: column;
+    font-size: calc((12px + 0.4vw));
+}
+
+* {
+    font-family: Tahoma, Geneva, sans-serif
+}
+
+div.top-banner {
+    width: 100%;
+    height: 100vh;
+    padding: 6rem 2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0 1 auto;
+
+    color: white;
+    text-align: center;
+
+    box-shadow: 0px 2px 4px -1px    rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px  rgba(0, 0, 0, 0.12);
+    transition: 140ms box-shadow;
+
+    background: linear-gradient(160deg, var(--color-1), var(--color-2));
+    background-size: 400% 400%;
+    
+    -webkit-animation: gradient-animation 30s ease infinite;
+    -moz-animation: gradient-animation 30s ease infinite;
+    animation: gradient-animation 30s ease infinite;
+}
+
+.top-banner-title {
+    font-weight: 500;
+    font-size: 3.5rem;
+    margin-block-start: 16px;
+    margin-block-end: 16px;
+}
+
+.top-banner-subtitle {
+    font-size: 1.5rem;
+}
+
+div.link-form {
+    width: 40%;
+    min-width: 240px;
+    margin: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+div.link-form * {
+    margin: 0.25rem 0;
+}
+
+div.stats {
+    font-size: 1.25rem;
+}
+
+div.features {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 auto;
+
+    margin: 3rem 0;
+}
+
+div.features div.row {
+    width: 70%;
+}
+
+div.features div.feature-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+div.feature-element div.feature-icon {
+    font-size: 3rem;
+}
+
+div.features div.feature-element h2 {
+    font-family: 'Lato Bold', sans-serif;
+    font-weight: bold;
+}
+
+div.features div.feature-element p {
+    font-size: 1.25rem;
+    width: 80%;
+}
+
+div.footer {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+div.footer-links {
+    display: flex;
+    flex-direction: row;
+}
+
+div.footer-link {
+    margin: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    align-items: center;
+}
+
+a div.footer-link * {
+    color: var(--color-1);
+    transition: color 140ms;
+}
+
+a:hover div.footer-link * {
+    color: var(--color-2);
+    cursor: pointer;
+}
+
+div.footer-link i {
+    font-size: 1.75rem;
+    margin-top: 10px;
+}
+
+div.footer-links.row div {
     padding-left: 0;
-    width:100%;
-    text-align: center;
-}
-h1{
-    font-size: 3em;
-    line-height: 1em;
-
-}
-h2{
-    font-size: 2em;
-    line-height: 1em;
-
-}
-h3{
-    font-size: 1.5em;
-    line-height: 1em;
-
+    padding-right: 0;
 }
 
-input, button{
-    border-radius: 0;
-    padding:0.4em;
-    margin:0;
-    border:none;
-   font-size: 1.2em;
-
+@-webkit-keyframes gradient-animation {
+    0%{background-position:0% 41%}
+    50%{background-position:100% 60%}
+    100%{background-position:0% 41%}
 }
 
-input{
-    background:none;
-    border:1px solid #007aff;
-    color:#007aff;
+@-moz-keyframes gradient-animation {
+    0%{background-position:0% 41%}
+    50%{background-position:100% 60%}
+    100%{background-position:0% 41%}
 }
 
-.form{
+@keyframes gradient-animation {
+    0%{background-position:0% 41%}
+    50%{background-position:100% 60%}
+    100%{background-position:0% 41%}
+}
+
+@media screen and (max-width: 555px) {
+    div.footer-links.row div {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width: 556px) {
+    div.top-banner {
+        height: initial;
+    }
+
+    div#action input[placeholder] {
+        flex: 1 1 auto;
+    }
+
+    div.link-form {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    div.link-form * {
+        margin: 0 0.25rem;
+    }
+
+    div.features div.feature-element {
+        margin: 2rem 0;
+    }
+
+    div.footer {
+        height: 10vh;
+    }
+
+    div.footer-link {
+        width: 8rem;
+        height: 8rem;
+    }
+}
+
+.flex-center {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-#label{
-    display:inline-block;
-    text-align: right;
-}
-button{
-    background-color:#007aff;
-    color:#FFF;
-}
-
-button:hover{
-    transform: scale(0.97);
-}
-
-a{
-    color:#000;
-    font-weight: bold;
-}
-a:visited{
-    color:#000;
-    font-weight: bold;
-}
-
-input:focus{
-    transform: scale(0.97);
-}
-
-#action{
-
-    background-color:#FFF;
-    color:#007aff;
-    padding:1em;
-    margin:1em;
-}
-
-#notes{
-    text-align: center;
-}
-
-main,footer{
-    font-size: 1.2em;
-
-    max-width: 1200px;
-	margin: 0 auto;
-    width:96%;
-    padding:2%;
-}
-main{
-    min-height: 60vh;
-}
-main a, main a:visited{
-    color:#007aff;
-}
-
-header{
-    width:100%;
-    text-align: left;
-    background-color:#007aff;
-    color:#FFF;
-    font-size: 1.2em;
-    padding:1em;
-}
-header >div{
-
-    max-width: 1200px;
-	margin: 0 auto;
-    width:100%;
-}
-header > div > div{
-    width:49%;
-    min-width: 300px;
-    display: inline-block;
-}
-
-header #plugins{
-    text-align: right;
-}
-header img, footer img{
-    height:1em;
-}
-
-footer{
-    font-size: 0.9em;
-    height:3em;
-    text-align: center;
-}
-
-footer div{
-    display: inline-block;
-    padding:0.2em;
-}
-
-footer #stats{
-    display: block;
-    width:100%;
-    text-align: center;
-}
-hr{
-    border:none;
-    height: 1px;
-    background-color:#FFF;
-}
-
-#features{
+div.redirect-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 
-#features div{
-    text-align: center;
-    float: 1;
-    padding:1em;
-}
-
-#features div img{
- height:3em;
-}
-
-
-#description img{
-    height:5em;
-    margin:auto;
-    display:block;
-    padding:1em;
-}
-
-#title a,#title a:visited{
-    color:#FFF;
-    text-decoration: none;
-    font-weight: normal;
+div.redirect-container a {
+    font-size: 1.2rem;
 }

@@ -6,51 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>Unshort.link- Free link unshort service</title>
-    <link href="/static/css/reset.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/icons.css">
     <link rel="prefetch">
 </head>
 
 <body>
     <header>
-        <div>
-            <div id="title"><a href="/"><img src="/static/img/logo.svg"> Unshort.link - Free Link unshorten service</a>
-            </div>
-            <div id="plugins">
-                Browser Plugins: <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><img
-                        src="/static/img/firefox.svg"></a> or <a
-                    href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><img
-                        src="/static/img/chrome.svg"></a>
-            </div>
+        <div class="top-banner">
+            <h1 class="top-banner-title">unshort.link</h1>
+            <p class="top-banner-subtitle">Prevent short link services from tracking you.</p>
+
+            {{ template "action" .}}
+
+            {{ if .LinkCount}}
+                <div id="stats" class="stats">{{.LinkCount}} links protected so far</div>
+            {{end}}
         </div>
     </header>
-
     <main>
-        <div id="description">
-            {{template  "description"}}
-        </div>
-        <div id="action">
-            {{ template "action"}}
-        </div>
-        <div id="notes">
-            {{ template "notes"}}
+        <div class="features">
+            <div class="row">
+                {{ template "description" .}}
+            </div>
         </div>
     </main>
     <footer>
-
-        <div><a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><img src="/static/img/firefox.svg">
-                Firefox plugin</a></div>
-        <div><a
-                href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><img
-                    src="/static/img/chrome.svg"> Chrome
-                plugin</a></div>
-        <div><a href="https://github.com/simonfrey/unshort.link/tree/master/server">Host it yourself</a></div>
-        <div><a href="https://github.com/simonfrey/unshort.link/blob/master/LICENSE.md">Open Source</a></div>
-        <div><a href="https://github.com/simonfrey/unshort.link/blob/master/icon_licenses.md">Icon licenses</a></div>
-        {{ if .LinkCount}}
-        <div id="stats">{{.LinkCount}} links protected so far</div>
-        {{end}}
+        <div class="footer">
+            {{ template "notes" .}}
+        </div>
     </footer>
 </body>
-
 </html>
