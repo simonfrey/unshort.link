@@ -38,6 +38,8 @@ func init() {
 		"www.twitter.com":  true,
 		"facebook.com":     true,
 		"www.facebook.com": true,
+		"www.unsplash.com": true,
+		"unsplash.com": true,
 	}
 }
 

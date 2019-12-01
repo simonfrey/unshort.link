@@ -104,6 +104,10 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 		return
 	}
 
+	if myUrl.Scheme == "" {
+		myUrl.Scheme = "http"
+	}
+
 	//Check in DB
 	endUrl, err := getUrlFromDB(myUrl)
 	if err != nil {
