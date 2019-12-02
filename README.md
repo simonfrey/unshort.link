@@ -20,6 +20,7 @@ If you implement it yourself that's even better
 
 Thanks to all the following contributors for their work on unshort.link!
 - [madstk1](https://github.com/madstk1) for the new bootstrap based frontend design (Dec 2019)
+- [dkter](https://github.com/dkter) for the bugfix bugfix of white text on white ground (Oct 2019)
 
 ## Contribution
 
