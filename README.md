@@ -16,6 +16,11 @@ If you implement it yourself that's even better
 - Remove known tracking parameters from the urls behind the short links (e.g. the facebook tracking parameter `utm_source`)
 - Remove as many url parameters as possible by keeping the same website result. This helps to remove tracking parameters that are so far unknown
 
+## Contributors
+
+Thanks to all the following contributors for their work on unshort.link!
+- [madstk1](https://github.com/madstk1) for the new bootstrap based frontend design (Dec 2019)
+
 ## Contribution
 
 Checkout the open issues if something fits for you and you would like to work on it. 
