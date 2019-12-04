@@ -23,6 +23,9 @@ func init() {
 }
 
 func main() {
+
+
+	http.Handle("/static/", http.FileServer(_escFS(useLocal)))
 	handler := func(rw http.ResponseWriter, req *http.Request) {
 		if req.URL.Path == "" || req.URL.Path == "/" || req.URL.Path == "/d/" || req.URL.Path == "/d" {
 			handleIndex(rw)
@@ -47,8 +50,6 @@ func main() {
 		}
 		handleUnShort(rw, req, true, false)
 	}
-
-	http.Handle("/static/", http.FileServer(_escFS(useLocal)))
 	http.HandleFunc("/", handler)
 
 	logrus.Infof("Run server on port '%s', with url '%s' and local assets is set to '%t'", port, serveUrl, useLocal)
