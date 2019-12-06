@@ -2,11 +2,9 @@
 Prevent short link services from tracking you by un shortening the urls for your. Try it on [unshort.link](https://unshort.link)
 
 ```
-**Design help wanted**
+**Logo Design help wanted**
 
-As you may have recognized the current frontend design of unshort.link is super basic and I would like to improve it. 
-If you are a designer send me the designs and I will then implement them for you in HTML, CSS should you not feel comfortable with that technologies. 
-If you implement it yourself that's even better
+It would be awesome to have a custom logo for unshort.link as it is required for the Firefox & Chrome webstores. The current one is just copied from flaticon.
 ```
 
 ## Features
@@ -15,6 +13,12 @@ If you implement it yourself that's even better
 - Check links against a blacklist to prevent access to a harmful website hidden behind a short link
 - Remove known tracking parameters from the urls behind the short links (e.g. the facebook tracking parameter `utm_source`)
 - Remove as many url parameters as possible by keeping the same website result. This helps to remove tracking parameters that are so far unknown
+
+## Contributors
+
+Thanks to all the following contributors for their work on unshort.link!
+- [madstk1](https://github.com/madstk1) for the new bootstrap based frontend design (Dec 2019)
+- [dkter](https://github.com/dkter) for the bugfix bugfix of white text on white ground (Oct 2019)
 
 ## Contribution
 
