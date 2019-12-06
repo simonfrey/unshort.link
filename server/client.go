@@ -23,7 +23,7 @@ var (
 
 func init() {
 	hClient = http.Client{
-		Timeout: 3 * time.Second,
+		Timeout: 13 * time.Second,
 	}
 
 	metaRedirectRegex = regexp.MustCompile(`<.*?(?:(?:http-equiv="refresh".*?content=".*?(?:url|URL)=(.*?)")|(?:content=".*?(?:url|URL)=(.*?)".*?http-equiv="refresh")).*?>`)
