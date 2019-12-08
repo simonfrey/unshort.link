@@ -24,6 +24,12 @@
             {{ if .LinkCount}}
                 <div id="stats" class="stats">{{.LinkCount}} links protected so far</div>
             {{end}}
+            
+            <div id="headerLinks">
+            <p>Get unshort.link browser extension</p>
+                <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><i class="icon-firefox-white"></i></a>
+        <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><i class="icon-chrome-white"></i></a>
+    </div>
         </div>
     </header>
     <main>
@@ -36,6 +42,40 @@
     <footer>
         <div class="footer">
             {{ template "notes" .}}
+            <div class="footer-links row">
+    <div class="col-sm-3">
+        <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/">
+            <div class="footer-link">
+                <i class="icon-firefox"></i>
+                <p>Firefox</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-3">
+        <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch">
+            <div class="footer-link">
+                <i class="icon-chrome"></i>
+                <p>Chrome</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-3">
+        <a href="https://github.com/simonfrey/unshort.link/">
+            <div class="footer-link">
+                <i class="icon-branch"></i>
+                <p>Source code</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-3">
+        <a href="https://github.com/simonfrey/unshort.link/tree/master/LICENSE.md">
+            <div class="footer-link">
+                <i class="icon-scroll"></i>
+                <p>License</p>
+            </div>
+        </a>
+    </div>
+</div>
         </div>
     </footer>
 </body>

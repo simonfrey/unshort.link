@@ -221,3 +221,27 @@ div.redirect-container {
 div.redirect-container a {
     font-size: 1.2rem;
 }
+
+div#action *{
+    margin:0;
+}
+
+div#action #urlDirect{
+    border-radius:0.25rem 0px 0px 0.25rem;
+}
+
+div#action #unshortDirectButton{
+    border-radius:0px 0.25rem 0.25rem 0px;
+}
+
+div#headerLinks{
+    border:2px solid #FFF;
+    padding:0.5em;
+    margin:0.5em;
+}
+
+div#headerLinks i[class*="icon"] {
+    width: 2em;
+    height: 2em;
+    background-size: 2em 2em;
+}

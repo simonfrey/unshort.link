@@ -10,5 +10,5 @@ require (
 	github.com/sergi/go-diff v1.0.0
 	github.com/sirupsen/logrus v1.4.2
 	golang.org/x/net v0.0.0-20191014212845-da9a3fd4c582 // indirect
-	golang.org/x/tools v0.0.0-20191101155306-5be387d313b4 // indirect
+	golang.org/x/tools v0.0.0-20191206204035-259af5ff87bd // indirect
 )
