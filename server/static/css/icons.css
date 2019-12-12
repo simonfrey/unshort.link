@@ -14,6 +14,9 @@ i.icon-shield {
 i.icon-warning {
   background-image: url(/static/icons/exclamation-triangle.svg);
 }
+i.icon-warning-red {
+   background-image: url(/static/icons/exclamation-triangle-red.svg);
+ }
 i.icon-scroll {
   background-image: url(/static/icons/scroll.svg);
 }

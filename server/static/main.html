@@ -16,20 +16,14 @@
 <body>
     <header>
         <div class="top-banner">
-            <h1 class="top-banner-title">unshort.link</h1>
-            <p class="top-banner-subtitle">Prevent short link services from tracking you.</p>
+            <a href="/" class="top-banner-title">unshort.link</a>
 
             {{ template "action" .}}
 
             {{ if .LinkCount}}
                 <div id="stats" class="stats">{{.LinkCount}} links protected so far</div>
             {{end}}
-            
-            <div id="headerLinks">
-            <p>Get unshort.link browser extension</p>
-                <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><i class="icon-firefox-white"></i></a>
-        <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><i class="icon-chrome-white"></i></a>
-    </div>
+           
         </div>
     </header>
     <main>

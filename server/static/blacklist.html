@@ -2,13 +2,14 @@
 
 {{end}}
 {{define "action"}}
+<div id="blacklisted">
 <h2>Blacklisted</h2>
-<img src="/static/img/warning.svg">
+<i class="icon-warning-red"></i>
 <div>
-    The short url <a href="{{.ShortUrl}}">{{.ShortUrl}}</a> redirects to a blacklisted host. Do you really want to continue to that url?
+    The short url <a href="{{.ShortUrl}}">{{.ShortUrl}}</a> redirects to a <b>blacklisted host</b>.
 </div>
-<h3>Do you really want to continue?</h3>
-<a href="{{.LongUrl}}">Continue to "{{.LongUrl}}"</a>
+<a href="{{.LongUrl}}" class="btn btn-lg btn-primary btn-red" >Continue to blacklisted host<br>"{{.LongUrl}}"</a>
+</div>
 {{end}}
 {{ define "notes" }}
 {{end}}
