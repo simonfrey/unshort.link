@@ -150,62 +150,7 @@ div.footer-links.row div {
     padding-right: 0;
 }
 
-@-webkit-keyframes gradient-animation {
-    0%{background-position:0% 41%}
-    50%{background-position:100% 60%}
-    100%{background-position:0% 41%}
-}
 
-@-moz-keyframes gradient-animation {
-    0%{background-position:0% 41%}
-    50%{background-position:100% 60%}
-    100%{background-position:0% 41%}
-}
-
-@keyframes gradient-animation {
-    0%{background-position:0% 41%}
-    50%{background-position:100% 60%}
-    100%{background-position:0% 41%}
-}
-
-@media screen and (max-width: 555px) {
-    div.footer-links.row div {
-        display: flex;
-        justify-content: center;
-    }
-}
-
-@media screen and (min-width: 556px) {
-    div.top-banner {
-        height: initial;
-    }
-
-    div#action input[placeholder] {
-        flex: 1 1 auto;
-    }
-
-    div.link-form {
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    div.link-form * {
-        margin: 0 0.25rem;
-    }
-
-    div.features div.feature-element {
-        margin: 2rem 0;
-    }
-
-    div.footer {
-        height: 10vh;
-    }
-
-    div.footer-link {
-        width: 8rem;
-        height: 8rem;
-    }
-}
 
 .flex-center {
     display: flex;
@@ -255,4 +200,68 @@ div#headerLinks i[class*="icon"] {
 
 .btn-red{
     background-color:red;
+}
+
+@-webkit-keyframes gradient-animation {
+    0%{background-position:0% 41%}
+    50%{background-position:100% 60%}
+    100%{background-position:0% 41%}
+}
+
+@-moz-keyframes gradient-animation {
+    0%{background-position:0% 41%}
+    50%{background-position:100% 60%}
+    100%{background-position:0% 41%}
+}
+
+@keyframes gradient-animation {
+    0%{background-position:0% 41%}
+    50%{background-position:100% 60%}
+    100%{background-position:0% 41%}
+}
+
+@media screen and (max-width: 555px) {
+    div.footer-links.row div {
+        display: flex;
+        justify-content: center;
+    }
+    div#action #urlDirect{
+        border-radius:0.25rem 0.25rem 0px 0px;
+    }
+    
+    div#action #unshortDirectButton{
+        border-radius:0px 0px 0.25rem 0.25rem;
+    }
+}
+
+@media screen and (min-width: 556px) {
+    div.top-banner {
+        height: initial;
+    }
+
+    div#action input[placeholder] {
+        flex: 1 1 auto;
+    }
+
+    div.link-form {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    div.link-form * {
+        margin: 0 0.25rem;
+    }
+
+    div.features div.feature-element {
+        margin: 2rem 0;
+    }
+
+    div.footer {
+        height: 10vh;
+    }
+
+    div.footer-link {
+        width: 8rem;
+        height: 8rem;
+    }
 }
