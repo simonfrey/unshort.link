@@ -104,7 +104,7 @@ func getUrl(inUrl *url.URL) (*UnShortUrl, error) {
 				return
 			}
 
-			if textEquality(string(baseBody), string(tmpBody)) > 0.6 {
+			if textEquality(string(baseBody), string(tmpBody)) > 0.75 {
 				foundChan <- tmQuery
 			}
 		}(parameters)
