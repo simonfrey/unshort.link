@@ -14,9 +14,16 @@ loadOptions();
 
 // Redirect services via unshort.link
 function redirect(requestDetails) {
-    if (requestDetails.originUrl != undefined && requestDetails.originUrl.startsWith(unshortPattern)){
-        console.log("Skip unlock because origin is "+unshortPattern);
-        return
+    if (requestDetails.originUrl != undefined) {
+      var l = document.createElement("a");
+      l.href = requestDetails.originUrl;
+      if (
+        requestDetails.originUrl.startsWith(unshortPattern) ||
+        requestDetails.url.includes(l.hostname)
+      ) {
+        console.log("Skip unshort because origin is " + unshortPattern);
+        return;
+      }
     }
     console.log("Unshort: ",requestDetails.url)
     var p = "/d/"

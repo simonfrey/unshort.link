@@ -129,12 +129,6 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 	}
 	logrus.Infof("Access url: '%v'", endUrl)
 
-	/*if endUrl.LongUrl.String() == endUrl.ShortUrl.String(){
-		http.Redirect(rw, req, endUrl.LongUrl.String(), http.StatusPermanentRedirect)
-	}
-
-	 */
-
 	if endUrl.Blacklisted {
 		handleShowBlacklistPage(rw, endUrl)
 		return
