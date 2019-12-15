@@ -132,7 +132,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 	/*if endUrl.LongUrl.String() == endUrl.ShortUrl.String(){
 		http.Redirect(rw, req, endUrl.LongUrl.String(), http.StatusPermanentRedirect)
 	}
-	
+
 	 */
 
 	if endUrl.Blacklisted {
