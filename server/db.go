@@ -96,6 +96,19 @@ func addHost(host string) error {
 
 	return nil
 }
+func removeHost(host string) error {
+	_, err := db.Get([]byte(host))
+	if err == nil {
+		return nil
+	}
+
+	err = db.Delete([]byte(fmt.Sprintf("host_%s", host)))
+	if err != nil {
+		return errors.Wrap(err, "Could not delete host from db")
+	}
+
+	return nil
+}
 
 func getHosts() ([]string, error) {
 	hosts := make([]string, 0)
