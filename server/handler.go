@@ -130,9 +130,6 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 	logrus.Infof("Access url: '%v'", endUrl)
 
 	if endUrl.LongUrl.String() == endUrl.ShortUrl.String(){
-		err := removeHost(endUrl.LongUrl.Host)
-		logrus.Errorf("Could not remove host: '%s'", err)
-
 		http.Redirect(rw, req, endUrl.LongUrl.String(), http.StatusPermanentRedirect)
 	}
 
