@@ -31,6 +31,14 @@
     <script>
         let buttonDirectElement = document.getElementById("unshortDirectButton");
         let urlDirectElement = document.getElementById("urlDirect");
+
+
+    if (navigator.userAgent.indexOf("Firefox") != -1) {
+        urlDirectElement.placeholder = "https://tinyurl.com/qlhjpjn"
+    } else {
+        urlDirectElement.placeholder = "https://tinyurl.com/v43klgn"
+    }
+    
         buttonDirectElement.addEventListener("click", function () {
             if (urlDirectElement.value != "") {
                 window.location.href = "https:\/\/unshort.link/d/" + urlDirectElement.value;
