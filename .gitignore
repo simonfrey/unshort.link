@@ -1,4 +1,6 @@
 db.bitcask
+.idea
+providerBackup
 blacklist.txt
 static.go
 server/unshort.link

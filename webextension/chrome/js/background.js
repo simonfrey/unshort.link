@@ -1,7 +1,7 @@
 // Set unshort server
 var unshortPattern = "https://unshort.link";
 var directRedirect = false;
-
+var active = true;
 function loadOptions() {
     function setData(result) {
         unshortPattern = result.serverUrl || "https://unshort.link";
@@ -14,6 +14,11 @@ loadOptions();
 
 // Redirect services via unshort.link
 function redirect(requestDetails) {
+    if (!active) {
+      console.log("Skip unshort plugin button was set to inactive");
+      return;
+    }
+    
     if (requestDetails.originUrl != undefined) {
       var l = document.createElement("a");
       l.href = requestDetails.originUrl;
@@ -59,3 +64,16 @@ req.addEventListener("load", function () {
 });
 req.send(null);
 
+
+
+
+
+chrome.browserAction.onClicked.addListener(function() {
+    if (active) {
+      active = false;
+      chrome.browserAction.setIcon({ path: "icons/128_deactivated.png" });
+    } else {
+      active = true;
+      chrome.browserAction.setIcon({ path: "icons/128.png" });
+    }
+  });
