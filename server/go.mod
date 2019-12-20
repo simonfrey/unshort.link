@@ -3,12 +3,15 @@ module unshort.link
 go 1.12
 
 require (
-	github.com/PuerkitoBio/goquery v1.5.0
+	github.com/go-sql-driver/mysql v1.4.1 // indirect
+	github.com/jmoiron/sqlx v1.2.0
+	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
+	github.com/lib/pq v1.1.1 // indirect
+	github.com/mattn/go-sqlite3 v1.11.0
 	github.com/pkg/errors v0.8.1
-	github.com/programmfabrik/esc v0.2.5 // indirect
-	github.com/prologic/bitcask v0.3.5
 	github.com/sergi/go-diff v1.0.0
 	github.com/sirupsen/logrus v1.4.2
-	golang.org/x/net v0.0.0-20191014212845-da9a3fd4c582 // indirect
-	golang.org/x/tools v0.0.0-20191212224101-0f69de236bb7 // indirect
+	github.com/stretchr/testify v1.3.0 // indirect
+	golang.org/x/sys v0.0.0-20190804053845-51ab0e2deafa // indirect
+	google.golang.org/appengine v1.4.0 // indirect
 )

@@ -9,7 +9,7 @@ import (
 
 //go:generate curl -o blacklist.txt https://hosts.ubuntu101.co.za/domains.list
 //go:generate go get -u github.com/programmfabrik/esc
-//go:generate esc -private -local-prefix-cwd -pkg=main -o=static.go static/ blacklist.txt standard_hosts.txt
+//go:generate esc -private -local-prefix-cwd -pkg=main -o=static.go static/ blacklist.txt
 
 var serveUrl, port string
 var useLocal bool
@@ -26,6 +26,10 @@ func main() {
 	handler := func(rw http.ResponseWriter, req *http.Request) {
 		if req.URL.Path == "" || req.URL.Path == "/" || req.URL.Path == "/d/" || req.URL.Path == "/d" {
 			handleIndex(rw)
+			return
+		}
+		if strings.HasPrefix(req.URL.Path, "favicon.ico") {
+			rw.WriteHeader(http.StatusNotFound)
 			return
 		}
 		if strings.HasPrefix(req.URL.Path, "/providers") {

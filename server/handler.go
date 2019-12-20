@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"unshort.link/db"
 )
 
 var schemeReplacer *strings.Replacer
@@ -28,7 +29,7 @@ type TemplateVars struct {
 }
 
 func handleIndex(rw http.ResponseWriter) {
-	linkCount, err := getLinkCount()
+	linkCount, err := db.GetLinkCount()
 	if err != nil {
 		handleError(rw, errors.Wrap(err, "Could not get link count"))
 		return
@@ -47,7 +48,7 @@ func handleIndex(rw http.ResponseWriter) {
 	}
 }
 
-func handleShowRedirectPage(rw http.ResponseWriter, url *UnShortUrl) {
+func handleShowRedirectPage(rw http.ResponseWriter, url *db.UnShortUrl) {
 	err := renderTemplate(rw,
 		append(
 			_escFSMustByte(useLocal, "/static/show.html"),
@@ -60,7 +61,7 @@ func handleShowRedirectPage(rw http.ResponseWriter, url *UnShortUrl) {
 		return
 	}
 }
-func handleShowBlacklistPage(rw http.ResponseWriter, url *UnShortUrl) {
+func handleShowBlacklistPage(rw http.ResponseWriter, url *db.UnShortUrl) {
 	err := renderTemplate(rw,
 		append(
 			_escFSMustByte(useLocal, "/static/blacklist.html"),
@@ -109,7 +110,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 	}
 
 	//Check in DB
-	endUrl, err := getUrlFromDB(myUrl)
+	endUrl, err := db.GetUrlFromDB(myUrl)
 	if err != nil {
 		logrus.Infof("Get new url from short link: '%s'", myUrl.String())
 
@@ -125,7 +126,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 		}
 
 		// Save to db
-		err = saveUrlToDB(*endUrl)
+		err = db.SaveUrlToDB(*endUrl)
 	}
 	logrus.Infof("Access url: '%v'", endUrl)
 
@@ -161,7 +162,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 }
 
 func handleProviders(rw http.ResponseWriter) {
-	providers, err := getHosts()
+	providers, err := db.GetHosts()
 	if err != nil {
 		handleError(rw, errors.Wrap(err, "Could not get hosts from db"))
 	}

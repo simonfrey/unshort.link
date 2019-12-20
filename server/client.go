@@ -13,6 +13,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"unshort.link/db"
 )
 
 var (
@@ -30,7 +31,7 @@ func init() {
 	badParams = []string{"utm_source", "utm_medium", "utm_term", "utm_content", "utm_campaign", "utm_reader", "utm_place", "utm_userid", "utm_cid", "utm_name", "utm_pubreferrer", "utm_swu", "utm_viz_id", "ga_source", "ga_medium", "ga_term", "ga_content", "ga_campaign", "ga_place", "yclid", "_openstat", "fb_action_ids", "fb_action_types", "fb_ref", "fb_source", "action_object_map", "action_type_map", "action_ref_map", "gs_l", "pd_rd_@amazon.", "_encoding@amazon.", "psc@amazon.", "ved@google.", "ei@google.", "sei@google.", "gws_rd@google.", "cvid@bing.com", "form@bing.com", "sk@bing.com", "sp@bing.com", "sc@bing.com", "qs@bing.com", "pq@bing.com", "feature@youtube.com", "gclid@youtube.com", "kw@youtube.com", "$/ref@amazon.", "_hsenc", "mkt_tok", "hmb_campaign", "hmb_medium", "hmb_source", "source@sourceforge.net", "position@sourceforge.net", "callback@bilibili.com", "elqTrackId", "elqTrack", "assetType", "assetId", "recipientId", "campaignId", "siteId", "tag@amazon.", "ref_@amazon.", "pf_rd_@amazon.", "spm@.aliexpress.com", "scm@.aliexpress.com", "aff_platform", "aff_trace_key", "terminal_id", "_hsmi", "fbclid", "spReportId", "spJobID", "spUserID", "spMailingID", "utm_mailing", "utm_brand", "CNDID", "mbid", "trk", "trkCampaign", "sc_campaign", "sc_channel", "sc_content", "sc_medium", "sc_outcome", "sc_geo", "sc_country"}
 }
 
-func getUrl(inUrl *url.URL) (*UnShortUrl, error) {
+func getUrl(inUrl *url.URL) (*db.UnShortUrl, error) {
 	if !strings.HasPrefix(inUrl.Scheme, "http") {
 		inUrl.Scheme = "http"
 	}
@@ -42,7 +43,7 @@ func getUrl(inUrl *url.URL) (*UnShortUrl, error) {
 
 	if resp.Request.URL.Host != inUrl.Host {
 		// Redirect happened
-		err = addHost(inUrl.Host)
+		err = db.AddHost(inUrl.Host)
 		if err != nil {
 			return nil, errors.Wrap(err, "Could not add new redirect host")
 		}
@@ -136,9 +137,9 @@ func getUrl(inUrl *url.URL) (*UnShortUrl, error) {
 	}
 	resp.Request.URL.RawQuery = rawQuery
 
-	return &UnShortUrl{
-		ShortUrl:    *inUrl,
-		LongUrl:     *resp.Request.URL,
+	return &db.UnShortUrl{
+		ShortUrl:    db.DUrl{*inUrl},
+		LongUrl:     db.DUrl{*resp.Request.URL},
 		Blacklisted: false,
 	}, nil
 }
