@@ -76,6 +76,7 @@ func handleShowBlacklistPage(rw http.ResponseWriter, url *db.UnShortUrl) {
 }
 
 func handleError(rw http.ResponseWriter, err error) {
+	rw.WriteHeader(http.StatusInternalServerError)
 	fmt.Fprintf(rw, "An error occured: %s", err)
 }
 
