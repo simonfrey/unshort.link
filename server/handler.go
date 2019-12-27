@@ -153,7 +153,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 		return
 	}
 
-	if !redirect {
+	if !redirect || endUrl.ShortUrl.String() == endUrl.LongUrl.String() {
 		handleShowRedirectPage(rw, endUrl)
 		return
 	}
