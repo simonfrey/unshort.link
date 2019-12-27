@@ -53,6 +53,8 @@ CREATE TABLE IF NOT EXISTS hosts (
 	providerBlacklist = map[string]bool{
 		"www.google.com":   true,
 		"google.com":       true,
+		"www.linkedin.com": true,
+		"linkedin.com":     true,
 		"twitter.com":      true,
 		"www.twitter.com":  true,
 		"facebook.com":     true,
@@ -66,6 +68,20 @@ type DUrl struct{ url.URL }
 
 func (u DUrl) Value() (driver.Value, error) {
 	return u.String(), nil
+}
+
+func (u DUrl) MarshalJSON() ([]byte, error) {
+	return []byte(u.String()), nil
+}
+
+func (u *DUrl) UnmarshalJSON(b []byte) error {
+	uu, err := u.Parse(string(b))
+	if err != nil {
+		return err
+	}
+
+	*u = DUrl{*uu}
+	return nil
 }
 
 func (u *DUrl) Scan(value interface{}) error {
@@ -135,7 +151,9 @@ func GetHosts() ([]string, error) {
 
 	u := make([]string, 0, len(h))
 	for _, v := range h {
-		u = append(u, v.Name)
+		if _, ok := providerBlacklist[v.Name]; !ok {
+			u = append(u, v.Name)
+		}
 	}
 	return u, err
 }
