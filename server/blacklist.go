@@ -3,7 +3,9 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"github.com/pkg/errors"
 	"log"
+	"os"
 	"sort"
 )
 
@@ -26,8 +28,20 @@ func hostIsInBlacklist(host string) bool {
 
 func loadBlacklist() {
 	blacklist = make([]string, 0)
-	s := bufio.NewScanner(bytes.NewReader(_escFSMustByte(useLocal, "/blacklist.txt")))
+	var s *bufio.Scanner
+	if _, err := os.Stat("blacklist.txt"); os.IsNotExist(err) {
+		s = bufio.NewScanner(bytes.NewReader(_escFSMustByte(useLocal, "/blacklist.txt")))
+	} else {
+		r, err := os.Open("blacklist.txt")
+		if err != nil {
+			panic(errors.Wrap(err, "Could not open blacklist.txt"))
+		}
+		s = bufio.NewScanner(r)
+	}
 	for s.Scan() {
+		if s.Text() == "" {
+			continue
+		}
 		blacklist = append(blacklist, s.Text())
 	}
 	err := s.Err()

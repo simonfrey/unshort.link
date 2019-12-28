@@ -6,9 +6,11 @@ import (
 	"database/sql/driver"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"log"
 	"net/url"
+	"os"
 	"strings"
 )
 
@@ -50,18 +52,37 @@ CREATE TABLE IF NOT EXISTS hosts (
 		}
 	}
 
-	providerBlacklist = map[string]bool{
-		"www.google.com":   true,
-		"google.com":       true,
-		"www.linkedin.com": true,
-		"linkedin.com":     true,
-		"twitter.com":      true,
-		"www.twitter.com":  true,
-		"facebook.com":     true,
-		"www.facebook.com": true,
-		"www.unsplash.com": true,
-		"unsplash.com":     true,
+	loadProviderBlacklist()
+}
+
+func loadProviderBlacklist() {
+	providerBlacklist = map[string]bool{}
+	var s *bufio.Scanner
+	if _, err := os.Stat("provider_blacklist.txt"); os.IsNotExist(err) {
+		s = bufio.NewScanner(strings.NewReader(`google.com
+linkedin.com
+twitter.com
+facebook.com
+unsplash.com`))
+	} else {
+		r, err := os.Open("provider_blacklist.txt")
+		if err != nil {
+			panic(errors.Wrap(err, "Could not open blacklist.txt"))
+		}
+		s = bufio.NewScanner(r)
 	}
+	for s.Scan() {
+		if s.Text() == "" {
+			continue
+		}
+		providerBlacklist[s.Text()] = true
+		providerBlacklist["www."+s.Text()] = true
+	}
+	err := s.Err()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
 
 type DUrl struct{ url.URL }
