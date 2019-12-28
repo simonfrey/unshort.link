@@ -21,10 +21,12 @@ func init() {
 }
 
 type TemplateVars struct {
-	ServerUrl string
-	ShortUrl  string
-	LongUrl   string
-	Error     string
+	ServerUrl    string
+	ShortUrl     string
+	FeedbackBody string
+	LongUrl      string
+	Error        string
+
 	LinkCount int
 }
 
@@ -48,13 +50,15 @@ func handleIndex(rw http.ResponseWriter) {
 	}
 }
 
-func handleShowRedirectPage(rw http.ResponseWriter, url *db.UnShortUrl) {
+func handleShowRedirectPage(rw http.ResponseWriter, u *db.UnShortUrl) {
 	err := renderTemplate(rw,
 		append(
 			_escFSMustByte(useLocal, "/static/show.html"),
 			_escFSMustByte(useLocal, "/static/main.html")...,
 		),
-		TemplateVars{LongUrl: url.LongUrl.String(), ShortUrl: url.ShortUrl.String()},
+		TemplateVars{LongUrl: u.LongUrl.String(),
+			ShortUrl:     u.ShortUrl.String(),
+			FeedbackBody: fmt.Sprintf("\n\n\n-----\nShort Url: %s\nLong Url: %s", u.ShortUrl.String(), u.LongUrl.String())},
 	)
 	if err != nil {
 		handleError(rw, err)
