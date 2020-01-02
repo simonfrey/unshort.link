@@ -193,6 +193,12 @@ div#headerLinks i[class*="icon"] {
     background-size: 2em 2em;
 }
 
+#buttonRedirect{
+    width:90%;
+    max-width: 600px;
+word-break: break-all;
+}
+
 #blacklisted h2, #blacklisted i{
     color:red;
 }
