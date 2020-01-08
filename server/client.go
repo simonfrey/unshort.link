@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -208,12 +210,24 @@ func getWithRedirects(inUrl *url.URL, maxTries int) (res *http.Response, body []
 		return nil, nil, errors.Wrap(err, "Could not get original url")
 	}
 
-	baseBody, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return nil, nil, errors.Wrap(err, "Could not read original body")
+
+	baseBody := bytes.Buffer{}
+	var b []byte
+	for {
+		b = make([]byte, 100)
+		_, err := resp.Body.Read(b)
+		if err == io.EOF {
+			break
+		}
+		baseBody.Write(b)
+		if bytes.Contains(b, []byte("</head>")) {
+			break
+		}
 	}
 
-	m := metaRedirectRegex.FindSubmatch(baseBody)
+
+	fmt.Println(baseBody.String())
+	m := metaRedirectRegex.FindSubmatch(baseBody.Bytes())
 	if len(m) == 3 {
 		d := string(m[1])
 		if d == "" {
@@ -225,5 +239,5 @@ func getWithRedirects(inUrl *url.URL, maxTries int) (res *http.Response, body []
 		}
 	}
 
-	return resp, baseBody, nil
+	return resp, baseBody.Bytes(), nil
 }
