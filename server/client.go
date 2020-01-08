@@ -64,9 +64,9 @@ func getUrl(inUrl *url.URL) (*db.UnShortUrl, error) {
 	wg := sync.WaitGroup{}
 	foundChan := make(chan string)
 	breakCtx, cancelFunc := context.WithTimeout(context.Background(), 5*time.Second)
-	rateLimitChan := make(chan bool, 2)
+	rateLimitChan := make(chan bool, 5)
 	for k, parameters := range queryParamSet {
-		if k >= 20 {
+		if k >= 15 {
 			break
 		}
 
@@ -210,7 +210,6 @@ func getWithRedirects(inUrl *url.URL, maxTries int) (res *http.Response, body []
 		return nil, nil, errors.Wrap(err, "Could not get original url")
 	}
 
-
 	baseBody := bytes.Buffer{}
 	var b []byte
 	for {
@@ -224,7 +223,6 @@ func getWithRedirects(inUrl *url.URL, maxTries int) (res *http.Response, body []
 			break
 		}
 	}
-
 
 	fmt.Println(baseBody.String())
 	m := metaRedirectRegex.FindSubmatch(baseBody.Bytes())
