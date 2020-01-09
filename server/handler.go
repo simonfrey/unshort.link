@@ -130,9 +130,8 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 	}
 
 	// Check for blacklist
-	if hostIsInBlacklist(endUrl.LongUrl.Host) {
-		endUrl.Blacklisted = true
-	}
+	endUrl.Blacklisted = hostIsInBlacklist(endUrl.LongUrl.Host)
+
 	logrus.Infof("Access url: '%v'", endUrl)
 
 	if api {
