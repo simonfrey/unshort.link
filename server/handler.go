@@ -135,11 +135,6 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 	}
 	logrus.Infof("Access url: '%v'", endUrl)
 
-	if endUrl.Blacklisted {
-		handleShowBlacklistPage(rw, endUrl)
-		return
-	}
-
 	if api {
 		jsoRes, err := json.Marshal(struct {
 			ShortLink   string `json:"short_link"`
@@ -155,6 +150,11 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 			return
 		}
 		_, _ = io.Copy(rw, bytes.NewReader(jsoRes))
+		return
+	}
+
+	if endUrl.Blacklisted {
+		handleShowBlacklistPage(rw, endUrl)
 		return
 	}
 
