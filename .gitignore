@@ -4,5 +4,3 @@ providerBackup
 blacklist.txt
 static.go
 server/unshort.link
-server/go.mod
-server/go.sum
