@@ -224,7 +224,6 @@ func getWithRedirects(inUrl *url.URL, maxTries int) (res *http.Response, body []
 		}
 	}
 
-	fmt.Println(baseBody.String())
 	m := metaRedirectRegex.FindSubmatch(baseBody.Bytes())
 	if len(m) == 3 {
 		d := string(m[1])
