@@ -25,7 +25,9 @@ jobs:
  #       fi
    
     - name: Generate
-      run: go generate ./...
+      run: |
+        export PATH=${PATH}:`go env GOPATH`/bin
+        go generate ./...
     - name: Test
       run: go test ./...
     - name: Vet
