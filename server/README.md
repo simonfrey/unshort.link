@@ -9,8 +9,7 @@ For using up unshort.link on your own server you need a [working golang installa
 ### 1) Generating assets
 
 The assets (html, css, js,...) are directly build into the binary for more portability and an easier usage. You need to 
-generate that code by entering `go generate ./...` in the main folder of the project. Because of the blacklist being big
-this process can take up to 10 minutes
+generate that code by entering `go generate ./...` in the main folder of the project.
 
 ### 2) Building
    
@@ -27,6 +26,12 @@ be up and running
 - `--url`: Set the url of the server you are running on (this is only required for the frontend) (Default: `http://localhost:8080`)
 - `--port`: Port to start the server on (Default: `8080`)
 - `--local`: Use the assets (frontend & blacklist) directly from the filesystem instead of the internal binary storage. This helps during the development of the frontend as you do not have to do `go generate ./...` after every change. This should not be used in production. (Default: `false`)
+- `--blacklist-sources`:  Comma separated list of blacklist urls to periodically sync. The blacklist should be a list of newline separated domains (Default https://hosts.ubuntu101.co.za/domains.list)
+- `--sync`: Blacklist synchronization interval. The format is a number and a unit. For example `30m` or `1.5h`, available units are `"s", "m", "h"`. Mixed values are also possible: `XhXmXs` (Default: one hour)
+
+## Development
+### How to run the unit tests
+Just run `go test ./...` from the command line.
 
 ## Docker
 

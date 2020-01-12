@@ -30,6 +30,10 @@ type TemplateVars struct {
 	LinkCount int
 }
 
+type blacklistSource interface {
+	IsBlacklisted(url string) bool
+}
+
 func handleIndex(rw http.ResponseWriter) {
 	linkCount, err := db.GetLinkCount()
 	if err != nil {
@@ -99,7 +103,7 @@ func renderTemplate(rw io.Writer, templateBytes []byte, vars TemplateVars) error
 	return nil
 }
 
-func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool) {
+func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool, blacklistSource blacklistSource) {
 	baseUrl := strings.TrimPrefix(req.URL.String(), serveUrl)
 	baseUrl = schemeReplacer.Replace(baseUrl)
 	baseUrl = strings.TrimPrefix(baseUrl, "/")
@@ -129,8 +133,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 		err = db.SaveUrlToDB(*endUrl)
 	}
 
-	// Check for blacklist
-	endUrl.Blacklisted = hostIsInBlacklist(endUrl.LongUrl.Host)
+	endUrl.Blacklisted = blacklistSource.IsBlacklisted(endUrl.LongUrl.Host)
 
 	logrus.Infof("Access url: '%v'", endUrl)
 
