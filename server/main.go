@@ -39,9 +39,7 @@ func main() {
 
 	handler := func(rw http.ResponseWriter, req *http.Request) {
 		if req.URL.Path == "" || req.URL.Path == "/" || req.URL.Path == "/d/" || req.URL.Path == "/d" {
-			// Render loading.html
-			renderLoading(rw)
-			handleIndex(rw)
+			handleIndex(rw, true)
 			return
 		}
 		if strings.HasPrefix(req.URL.Path, "favicon.ico") {
