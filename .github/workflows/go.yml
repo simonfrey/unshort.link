@@ -42,7 +42,7 @@ jobs:
         go vet ./...
     - name: Lint
       run: |
-        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b `go env GOPATH`/bin v1.22.2
         cd server
-        golangci-lint run
+        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.22.2
+        ./bin/golangci-lint run
 
