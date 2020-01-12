@@ -1,0 +1,13 @@
+{{define "description"}}
+{{end}}
+{{define "action"}}
+<div id="error">
+<h2>Error</h2>
+<i class="icon-warning-red"></i>
+<div>
+{{.Error}}
+</div>
+{{end}}
+{{ define "notes" }}
+    <a href="mailto:unshortfeedback@simon-frey.eu?subject=Unshort.link%20Feedback&body={{.FeedbackBody}}" id="linkProblem" class="btn btn-secondary">Feedback?</a>
+{{end}}

@@ -85,7 +85,17 @@ func handleShowBlacklistPage(rw http.ResponseWriter, url *db.UnShortUrl) {
 
 func handleError(rw http.ResponseWriter, err error) {
 	rw.WriteHeader(http.StatusInternalServerError)
-	fmt.Fprintf(rw, "An error occured: %s", err)
+	nErr := renderTemplate(rw,
+		append(
+			_escFSMustByte(useLocal, "/static/error.html"),
+			_escFSMustByte(useLocal, "/static/main.html")...,
+		),
+		TemplateVars{Error: err.Error()},
+	)
+	if nErr != nil {
+
+		fmt.Fprintf(rw, "An error occured: %s", err)
+	}
 }
 
 func renderTemplate(rw io.Writer, templateBytes []byte, vars TemplateVars) error {
