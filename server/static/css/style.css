@@ -214,6 +214,26 @@ word-break: break-all;
     bottom:5px;
 }
 
+#error h2{
+    color:red;
+}
+
+
+#loadingSpinner{
+    width:100%;
+    max-width: 214px;
+    position: relative;
+    text-align: center;
+}
+#loadingSpinner img{
+    width: 100%;
+}
+#loadingSpinner #loadingText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 @-webkit-keyframes gradient-animation {
     0%{background-position:0% 41%}
     50%{background-position:100% 60%}

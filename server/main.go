@@ -24,7 +24,7 @@ func init() {
 	flag.StringVar(&serveUrl, "url", "http://localhost:8080", "The server url this server runs on. (Required for the frontend)")
 	flag.StringVar(&port, "port", "8080", "Port to run the server on")
 	flag.DurationVar(&blacklistSyncInterval, "sync", time.Hour, "Blacklist synchronization interval")
-	rawBlacklistUrls := flag.String("blacklist-sources", "https://hosts.ubuntu101.co.za/domains.list","Comma separated list of blacklist urls to periodically sync")
+	rawBlacklistUrls := flag.String("blacklist-sources", "https://hosts.ubuntu101.co.za/domains.list", "Comma separated list of blacklist urls to periodically sync")
 	flag.Parse()
 	blacklistUrls = strings.Split(*rawBlacklistUrls, ",")
 }
@@ -37,8 +37,10 @@ func main() {
 	blacklistSource := blacklist.NewSqliteRepository(db)
 	go blacklist.NewLoader(blacklistUrls, blacklistSource, blacklistSyncInterval).StartSync()
 
-
 	handler := func(rw http.ResponseWriter, req *http.Request) {
+		// Render loading.html
+		renderLoading(rw)
+
 		if req.URL.Path == "" || req.URL.Path == "/" || req.URL.Path == "/d/" || req.URL.Path == "/d" {
 			handleIndex(rw)
 			return

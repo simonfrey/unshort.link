@@ -83,6 +83,13 @@ func handleShowBlacklistPage(rw http.ResponseWriter, url *db.UnShortUrl) {
 	}
 }
 
+func renderLoading(rw http.ResponseWriter) {
+	io.Copy(rw, bytes.NewReader(_escFSMustByte(useLocal, "/static/loading.html")))
+	if f, ok := rw.(http.Flusher); ok {
+		f.Flush()
+	}
+}
+
 func handleError(rw http.ResponseWriter, err error) {
 	rw.WriteHeader(http.StatusInternalServerError)
 	nErr := renderTemplate(rw,
