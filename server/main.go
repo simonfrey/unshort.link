@@ -38,10 +38,9 @@ func main() {
 	go blacklist.NewLoader(blacklistUrls, blacklistSource, blacklistSyncInterval).StartSync()
 
 	handler := func(rw http.ResponseWriter, req *http.Request) {
-		// Render loading.html
-		renderLoading(rw)
-
 		if req.URL.Path == "" || req.URL.Path == "/" || req.URL.Path == "/d/" || req.URL.Path == "/d" {
+			// Render loading.html
+			renderLoading(rw)
 			handleIndex(rw)
 			return
 		}
@@ -58,15 +57,18 @@ func main() {
 		}
 		if strings.HasPrefix(req.URL.Path, "/api/") {
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/api")
-			handleUnShort(rw, req, false, true, blacklistSource)
+			handleUnShort(rw, req, false, true, false, blacklistSource)
 			return
 		}
 		if strings.HasPrefix(req.URL.Path, "/d/") {
+			// Render loading.html
+
+			renderLoading(rw)
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/d")
-			handleUnShort(rw, req, false, false, blacklistSource)
+			handleUnShort(rw, req, false, false, true, blacklistSource)
 			return
 		}
-		handleUnShort(rw, req, true, false, blacklistSource)
+		handleUnShort(rw, req, true, false, false, blacklistSource)
 	}
 
 	http.Handle("/static/", http.FileServer(_escFS(useLocal)))

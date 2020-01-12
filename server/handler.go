@@ -120,13 +120,16 @@ func renderTemplate(rw io.Writer, templateBytes []byte, vars TemplateVars) error
 	return nil
 }
 
-func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool, blacklistSource blacklistSource) {
+func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, loadingRendered bool, blacklistSource blacklistSource) {
 	baseUrl := strings.TrimPrefix(req.URL.String(), serveUrl)
 	baseUrl = schemeReplacer.Replace(baseUrl)
 	baseUrl = strings.TrimPrefix(baseUrl, "/")
 
 	myUrl, err := url.Parse(baseUrl)
 	if err != nil {
+		if !loadingRendered {
+			renderLoading(rw)
+		}
 		handleError(rw, err)
 		return
 	}
@@ -142,6 +145,9 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 
 		endUrl, err = getUrl(myUrl)
 		if err != nil {
+			if !loadingRendered {
+				renderLoading(rw)
+			}
 			handleError(rw, err)
 			return
 		}
@@ -149,6 +155,9 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 		// Save to db
 		err = db.SaveUrlToDB(*endUrl)
 		if err != nil {
+			if !loadingRendered {
+				renderLoading(rw)
+			}
 			handleError(rw, err)
 			return
 		}
@@ -169,6 +178,9 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 			Blacklisted: endUrl.Blacklisted,
 		})
 		if err != nil {
+			if !loadingRendered {
+				renderLoading(rw)
+			}
 			handleError(rw, errors.Wrap(err, "Could not marshal json"))
 			return
 		}
@@ -177,11 +189,17 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 	}
 
 	if endUrl.Blacklisted {
+		if !loadingRendered {
+			renderLoading(rw)
+		}
 		handleShowBlacklistPage(rw, endUrl)
 		return
 	}
 
 	if !redirect || endUrl.ShortUrl.String() == endUrl.LongUrl.String() {
+		if !loadingRendered {
+			renderLoading(rw)
+		}
 		handleShowRedirectPage(rw, endUrl)
 		return
 	}
