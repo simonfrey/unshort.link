@@ -32,3 +32,11 @@ be up and running
 ## Development
 ### How to run the unit tests
 Just run `go test ./...` from the command line.
+
+## Docker
+
+Build and run a dockerized version of the app:
+```
+cd server
+docker build -t test/unshort .
+docker run --rm --name unlink -p 8080:8080 test/unshort
