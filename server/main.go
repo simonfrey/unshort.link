@@ -12,6 +12,7 @@ import (
 )
 
 //go:generate go get -u github.com/programmfabrik/esc
+//go:generate esc -private -local-prefix-cwd -pkg=main -o=static.go static/
 
 var serveUrl, port string
 var useLocal bool

@@ -26,5 +26,9 @@ be up and running
 - `--url`: Set the url of the server you are running on (this is only required for the frontend) (Default: `http://localhost:8080`)
 - `--port`: Port to start the server on (Default: `8080`)
 - `--local`: Use the assets (frontend & blacklist) directly from the filesystem instead of the internal binary storage. This helps during the development of the frontend as you do not have to do `go generate ./...` after every change. This should not be used in production. (Default: `false`)
-- `--blacklist-sources`:  Comma separated list of blacklist urls to periodically sync (Default https://hosts.ubuntu101.co.za/domains.list)
-- `--sync`: Blacklist synchronization interval (Default: one hour)
+- `--blacklist-sources`:  Comma separated list of blacklist urls to periodically sync. The blacklist should be a list of newline separated domains (Default https://hosts.ubuntu101.co.za/domains.list)
+- `--sync`: Blacklist synchronization interval. The format is a number and a unit. For example `30m` or `1.5h`, available units are `"s", "m", "h"`. Mixed values are also possible: `XhXmXs` (Default: one hour)
+
+## Development
+### How to run the unit tests
+Just run `go test ./...` from the command line.
