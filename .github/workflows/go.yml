@@ -1,5 +1,5 @@
 name: Go
-on: [push]
+on: [push, pull_request]
 jobs:
 
   build:
@@ -25,10 +25,24 @@ jobs:
  #       fi
    
     - name: Generate
-      run: go generate ./...
-    - name: Test
-      run: go test ./...
-    - name: Vet
-      run: go vet ./...
+      run: |
+        export PATH=${PATH}:`go env GOPATH`/bin
+        go generate ./...
     - name: Build
-      run: go build -v .
+      run: |
+        cd server
+        go build .
+    - name: Test
+      run: |
+        cd server
+        go test ./...
+    - name: Vet
+      run: |
+        cd server
+        go vet ./...
+    - name: Lint
+      run: |
+        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.22.2
+        cd server
+        golangci-lint run
+
