@@ -52,7 +52,7 @@ func getUrl(inUrl *url.URL) (*db.UnShortUrl, error) {
 	}
 
 	queryParams := make([]string, 0)
-	for k, _ := range resp.Request.URL.Query() {
+	for k := range resp.Request.URL.Query() {
 		queryParams = append(queryParams, fmt.Sprintf("%s=%s", k, resp.Request.URL.Query().Get(k)))
 	}
 
@@ -140,8 +140,8 @@ func getUrl(inUrl *url.URL) (*db.UnShortUrl, error) {
 	resp.Request.URL.RawQuery = rawQuery
 
 	return &db.UnShortUrl{
-		ShortUrl:    db.DUrl{*inUrl},
-		LongUrl:     db.DUrl{*resp.Request.URL},
+		ShortUrl:    db.DUrl{URL: *inUrl},
+		LongUrl:     db.DUrl{URL: *resp.Request.URL},
 		Blacklisted: false,
 	}, nil
 }

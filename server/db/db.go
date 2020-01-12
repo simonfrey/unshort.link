@@ -132,7 +132,7 @@ func GetUrlFromDB(shortUrl *url.URL) (*UnShortUrl, error) {
 	u := &UnShortUrl{}
 	err := db.Get(u, "SELECT * FROM links WHERE short_url = ? LIMIT 1", shortUrl.String())
 	if err != nil {
-		logrus.Errorf("COUld not GET url:", err)
+		logrus.Errorf("Could not GET url: %s", err)
 	}
 	return u, err
 }
@@ -141,7 +141,7 @@ func SaveUrlToDB(url UnShortUrl) error {
 	_, err := db.Exec("INSERT INTO links (short_url, long_url, blacklisted) VALUES (?, ?, ?)",
 		url.ShortUrl, url.LongUrl, url.Blacklisted)
 	if err != nil {
-		logrus.Errorf("COUld not save new url:", err)
+		logrus.Errorf("Could not save new url: %s", err)
 	}
 	return err
 }
@@ -154,6 +154,9 @@ func GetLinkCount() (int, error) {
 
 func AddHost(host string) error {
 	res, err := db.Query("SELECT * FROM hosts where name = ?", host)
+	if err != nil {
+		return errors.Wrap(err, "Could not select from db")
+	}
 	if res.Next() {
 		// The host is already in the db
 		return nil

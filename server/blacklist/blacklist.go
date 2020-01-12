@@ -24,7 +24,7 @@ func NewLoader(urls []string, repo Repository, syncInterval time.Duration) Loade
 }
 
 func (l Loader) StartSync() {
-	for true {
+	for {
 		startTime := time.Now()
 
 		l.load(startTime)

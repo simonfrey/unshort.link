@@ -131,6 +131,10 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 
 		// Save to db
 		err = db.SaveUrlToDB(*endUrl)
+		if err != nil {
+			handleError(rw, err)
+			return
+		}
 	}
 
 	endUrl.Blacklisted = blacklistSource.IsBlacklisted(endUrl.LongUrl.Host)
