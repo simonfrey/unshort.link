@@ -27,12 +27,17 @@ jobs:
     - name: Generate
       run: |
         export PATH=${PATH}:`go env GOPATH`/bin
-        cd server
         go generate ./...
     - name: Build
-      run: go build .
+      run: |
+        cd server
+        go build .
     - name: Test
-      run: go test ./...
+      run: |
+        cd server
+        go test ./...
     - name: Vet
-      run: go vet ./...
+      run: |
+        cd server
+        go vet ./...
 
