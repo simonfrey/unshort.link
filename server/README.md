@@ -18,7 +18,7 @@ the assets first)
 
 ## Or using Make
 
-You can easily build the server by using `make build` inside the `server` directory
+You can easily build the server by using `make build`
 
 ## Setup
 
