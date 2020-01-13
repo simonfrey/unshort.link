@@ -157,6 +157,10 @@ func AddHost(host string) error {
 	if err != nil {
 		return errors.Wrap(err, "Could not select from db")
 	}
+	defer func() {
+		_ = res.Close()
+	}()
+
 	if res.Next() {
 		// The host is already in the db
 		return nil
