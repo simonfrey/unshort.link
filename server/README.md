@@ -16,6 +16,10 @@ generate that code by entering `go generate ./...` in the main folder of the pro
 Building the project works with `go build` in the main folder of the project. (Please keep in mind that you need to generate
 the assets first)
 
+## Or using Make
+
+You can easily build the server by using `make build` inside the `server` directory
+
 ## Setup
 
 The building process provides you with an all-inclusive binary. Just enter `./unshort.link` in your console and you should
