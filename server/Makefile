@@ -21,6 +21,11 @@ test:
 	@go vet ./...
 	@echo "Finished vet"
 
+clean:
+	@echo "Started cleaning...."
+	@rm static.go blacklist.db link.db unshort.link
+	@echo "Finished cleaning"
+
 dockerize:
 	@echo "Start dockerizing...."
 	docker image build -t $(IMAGE_NAME) .

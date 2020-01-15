@@ -56,3 +56,6 @@ be up and running
 Just run `go test ./...` from the command line.
 
 Or use `make test` command
+
+### How to clean generated files and db
+Just run `make clean` from the command line.
