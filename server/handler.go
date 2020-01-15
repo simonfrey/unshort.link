@@ -44,6 +44,7 @@ func handleIndex(rw http.ResponseWriter, renderLoadingHTML bool) {
 		handleError(rw, errors.Wrap(err, "Could not get link count"), false)
 		return
 	}
+	linkCount = linkCount - (linkCount % 500)
 
 	err = renderTemplate(rw,
 		append(
