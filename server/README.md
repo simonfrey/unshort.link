@@ -16,6 +16,28 @@ generate that code by entering `go generate ./...` in the main folder of the pro
 Building the project works with `go build` in the main folder of the project. (Please keep in mind that you need to generate
 the assets first)
 
+## Or using Make
+
+You can easily build the server by using `make build`
+
+## Or using Docker
+
+### 1) Building
+
+Use `docker build -t unshort .`
+
+Or
+
+Use the command `make dockerize` to build the docker image using make
+
+### 2) Running
+
+Now run the docker container using `docker container run --rm --name unlink -p 80:8080 unshort`
+
+You can any port instead of 80 in the example command above.
+
+For example, you can run the docker container on the host machine's port 8085 using `docker container run -p 8085:8080 unshort`   
+
 ## Setup
 
 The building process provides you with an all-inclusive binary. Just enter `./unshort.link` in your console and you should
@@ -33,10 +55,7 @@ be up and running
 ### How to run the unit tests
 Just run `go test ./...` from the command line.
 
-## Docker
+Or use `make test` command
 
-Build and run a dockerized version of the app:
-```
-cd server
-docker build -t test/unshort .
-docker run --rm --name unlink -p 8080:8080 test/unshort
+### How to clean generated files and db
+Just run `make clean` from the command line.
