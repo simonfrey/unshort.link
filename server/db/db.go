@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS hosts (
 func loadProviderBlacklist() {
 	providerBlacklist = map[string]bool{}
 	var s *bufio.Scanner
-	if _, err := os.Stat("provider_blacklist.txt"); os.IsNotExist(err) {
+	if _, err := os.Stat("./provider_blacklist.txt"); os.IsNotExist(err) {
 		s = bufio.NewScanner(strings.NewReader(`google.com
 linkedin.com
 twitter.com
