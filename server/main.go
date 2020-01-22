@@ -55,18 +55,17 @@ func main() {
 		}
 		if strings.HasPrefix(req.URL.Path, "/api/") {
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/api")
-			handleUnShort(rw, req, false, true, false, blacklistSource)
+			handleUnShort(rw, req, false, true, blacklistSource)
 			return
 		}
-		if strings.HasPrefix(req.URL.Path, "/d/") {
-			// Render loading.html
 
-			renderLoading(rw)
+		redirect := true
+		if strings.HasPrefix(req.URL.Path, "/d/") {
+			redirect = false
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/d")
-			handleUnShort(rw, req, false, false, true, blacklistSource)
-			return
 		}
-		handleUnShort(rw, req, true, false, false, blacklistSource)
+
+		handleUnShort(rw, req, redirect, false, blacklistSource)
 	}
 
 	http.Handle("/static/", http.FileServer(_escFS(useLocal)))

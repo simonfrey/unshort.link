@@ -21,13 +21,13 @@ func init() {
 }
 
 type TemplateVars struct {
-	ServerUrl    string
-	ShortUrl     string
-	FeedbackBody string
-	LongUrl      string
-	Error        string
-
-	LinkCount int
+	ServerUrl      string
+	ShortUrl       string
+	FeedbackBody   string
+	LongUrl        string
+	Error          string
+	DirectRedirect bool
+	LinkCount      int
 }
 
 type blacklistSource interface {
@@ -59,7 +59,7 @@ func handleIndex(rw http.ResponseWriter, renderLoadingHTML bool) {
 	}
 }
 
-func handleShowRedirectPage(rw http.ResponseWriter, u *db.UnShortUrl, renderLoadingHTML bool) {
+func handleShowRedirectPage(rw http.ResponseWriter, u *db.UnShortUrl, renderLoadingHTML, directRedirect bool) {
 	if renderLoadingHTML {
 		renderLoading(rw)
 	}
@@ -69,7 +69,8 @@ func handleShowRedirectPage(rw http.ResponseWriter, u *db.UnShortUrl, renderLoad
 			_escFSMustByte(useLocal, "/static/show.html"),
 			_escFSMustByte(useLocal, "/static/main.html")...,
 		),
-		TemplateVars{LongUrl: u.LongUrl.String(),
+		TemplateVars{DirectRedirect: directRedirect,
+			LongUrl:      u.LongUrl.String(),
 			ShortUrl:     u.ShortUrl.String(),
 			FeedbackBody: fmt.Sprintf("\n\n\n-----\nShort Url: %s\nLong Url: %s", u.ShortUrl.String(), u.LongUrl.String())},
 	)
@@ -103,12 +104,16 @@ func renderLoading(rw http.ResponseWriter) {
 	}
 }
 
+func handleApiError(rw http.ResponseWriter, err error) {
+	rw.WriteHeader(http.StatusInternalServerError)
+	_, _ = io.Copy(rw, strings.NewReader(err.Error()))
+}
+
 func handleError(rw http.ResponseWriter, err error, renderLoadingHTML bool) {
 	if renderLoadingHTML {
 		renderLoading(rw)
 	}
 
-	rw.WriteHeader(http.StatusInternalServerError)
 	nErr := renderTemplate(rw,
 		append(
 			_escFSMustByte(useLocal, "/static/error.html"),
@@ -136,14 +141,18 @@ func renderTemplate(rw io.Writer, templateBytes []byte, vars TemplateVars) error
 	return nil
 }
 
-func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, loadingRendered bool, blacklistSource blacklistSource) {
+func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool, blacklistSource blacklistSource) {
+	if !api {
+		renderLoading(rw)
+	}
+
 	baseUrl := strings.TrimPrefix(req.URL.String(), serveUrl)
 	baseUrl = schemeReplacer.Replace(baseUrl)
 	baseUrl = strings.TrimPrefix(baseUrl, "/")
 
 	myUrl, err := url.Parse(baseUrl)
 	if err != nil {
-		handleError(rw, err, !loadingRendered)
+		handleError(rw, err, api)
 		return
 	}
 
@@ -158,14 +167,14 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, loa
 
 		endUrl, err = getUrl(myUrl)
 		if err != nil {
-			handleError(rw, err, !loadingRendered)
+			handleError(rw, err, api)
 			return
 		}
 
 		// Save to db
 		err = db.SaveUrlToDB(*endUrl)
 		if err != nil {
-			handleError(rw, err, !loadingRendered)
+			handleError(rw, err, api)
 			return
 		}
 	}
@@ -185,7 +194,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, loa
 			Blacklisted: endUrl.Blacklisted,
 		})
 		if err != nil {
-			handleError(rw, errors.Wrap(err, "Could not marshal json"), !loadingRendered)
+			handleApiError(rw, errors.Wrap(err, "Could not marshal json"))
 			return
 		}
 		_, _ = io.Copy(rw, bytes.NewReader(jsoRes))
@@ -193,19 +202,15 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, loa
 	}
 
 	if endUrl.Blacklisted {
-		handleShowBlacklistPage(rw, endUrl, !loadingRendered)
+		handleShowBlacklistPage(rw, endUrl, api)
 		return
 	}
 
-	if !redirect || endUrl.ShortUrl.String() == endUrl.LongUrl.String() {
-		if !loadingRendered {
-			renderLoading(rw)
-		}
-		handleShowRedirectPage(rw, endUrl, !loadingRendered)
-		return
+	if endUrl.ShortUrl.String() == endUrl.LongUrl.String() {
+		redirect = true
 	}
 
-	http.Redirect(rw, req, endUrl.LongUrl.String(), http.StatusPermanentRedirect)
+	handleShowRedirectPage(rw, endUrl, api, redirect)
 }
 
 func handleProviders(rw http.ResponseWriter) {

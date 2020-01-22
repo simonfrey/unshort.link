@@ -2,6 +2,9 @@
 
 {{end}}
 {{define "action"}}
+    {{if .DirectRedirect}}
+        <meta http-equiv="refresh" content="0; url={{.LongUrl}}" />
+    {{end}}
     <div style="text-align: center" class="w-100">
       <p>You got here because you opened the short url<br>
         <a href="{{.ShortUrl}}">{{.ShortUrl}}</a>
