@@ -3,14 +3,21 @@
     --color-2: #73d9e4;
 }
 
+@font-face {
+    font-family: 'AdventPro';
+    src: url('/static/fonts/adventpro.woff') format('woff');
+}
+
+
 html, body {
     display: flex;
     flex-direction: column;
     font-size: calc((12px + 0.4vw));
+    background-color: #0a0a1e;
 }
 
 * {
-    font-family: Tahoma, Geneva, sans-serif
+    font-family: 'AdventPro', Tahoma, Geneva, sans-serif;
 }
 a{
     color:#FFF;
@@ -31,8 +38,9 @@ div.top-banner {
 
     box-shadow: 0px 2px 4px -1px    rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px  rgba(0, 0, 0, 0.12);
     transition: 140ms box-shadow;
-
-    background: linear-gradient(160deg, var(--color-1), var(--color-2));
+    
+    
+    background-image: linear-gradient(to bottom, #0a162a, #0b1327, #0b1124, #0b0e21, #0a0a1e);
     background-size: 400% 400%;
     
     -webkit-animation: gradient-animation 30s ease infinite;
@@ -75,6 +83,7 @@ div.features {
     justify-content: center;
     align-items: center;
     flex: 1 1 auto;
+    color: #fff;
 
     margin: 3rem 0;
 }

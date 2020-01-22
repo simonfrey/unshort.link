@@ -5,6 +5,13 @@ i[class*="icon"] {
   background-size: 48px 48px;
 }
 
+i.logo {
+  display: inline-block;
+  width: 128px;
+  height: 128px;
+  background-size: 128px 128px;
+  background-image: url(/static/icons/unshortlink.svg);
+}
 i.icon-cookie {
   background-image: url(/static/icons/cookie-bite.svg);
 }
