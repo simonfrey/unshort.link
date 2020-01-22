@@ -1,189 +1,34 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   id="svg8"
-   version="1.1"
-   viewBox="0 0 135.46667 135.46667"
-   height="512"
-   width="512">
-  <defs
-     id="defs2">
-    <linearGradient
-       id="linearGradient4823">
-      <stop
-         style="stop-color:#da892f;stop-opacity:1"
-         offset="0"
-         id="stop4819" />
-      <stop
-         style="stop-color:#bbc027;stop-opacity:1"
-         offset="1"
-         id="stop4821" />
-    </linearGradient>
-    <marker
-       style="overflow:visible"
-       id="Tail"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <g
-         transform="scale(-1.2)"
-         id="g883">
-        <path
-           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.80000001;stroke-linecap:round"
-           d="M -3.8048674,-3.9585227 0.54352094,0"
-           id="path871" />
-        <path
-           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.80000001;stroke-linecap:round"
-           d="M -1.2866832,-3.9585227 3.0617053,0"
-           id="path873" />
-        <path
-           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.80000001;stroke-linecap:round"
-           d="M 1.3053582,-3.9585227 5.6537466,0"
-           id="path875" />
-        <path
-           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.80000001;stroke-linecap:round"
-           d="M -3.8048674,4.1775838 0.54352094,0.21974226"
-           id="path877" />
-        <path
-           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.80000001;stroke-linecap:round"
-           d="M -1.2866832,4.1775838 3.0617053,0.21974226"
-           id="path879" />
-        <path
-           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.80000001;stroke-linecap:round"
-           d="M 1.3053582,4.1775838 5.6537466,0.21974226"
-           id="path881" />
-      </g>
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="marker1173"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.8,0,0,0.8,10,0)"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1171" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="marker1145"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.8,0,0,0.8,10,0)"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1143" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="marker1123"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.8,0,0,0.8,10,0)"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1121" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="marker1107"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.8,0,0,0.8,10,0)"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1105" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1Lstart"
-       refX="0"
-       refY="0"
-       orient="auto">
-      <path
-         transform="matrix(0.8,0,0,0.8,10,0)"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path835" />
-    </marker>
-    <linearGradient
-       xlink:href="#linearGradient4823"
-       id="linearGradient4825"
-       x1="228.57143"
-       y1="328.23398"
-       x2="1060"
-       y2="172.51968"
-       gradientUnits="userSpaceOnUse" />
-  </defs>
-  <metadata
-     id="metadata5">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-        <cc:license
-           rdf:resource="http://creativecommons.org/licenses/by/4.0/" />
-      </cc:Work>
-      <cc:License
-         rdf:about="http://creativecommons.org/licenses/by/4.0/">
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Reproduction" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Distribution" />
-        <cc:requires
-           rdf:resource="http://creativecommons.org/ns#Notice" />
-        <cc:requires
-           rdf:resource="http://creativecommons.org/ns#Attribution" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
-      </cc:License>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="layer1"
-     transform="matrix(0.53539422,0,0,0.53539422,-20.060698,38.806655)">
-    <path
-       style="opacity:1;fill:url(#linearGradient4825);fill-opacity:1;stroke:none;stroke-width:45.95376205;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 620.9082,-273.94922 c -149.76407,0 -270.33203,120.56794 -270.33203,270.3320325 V 103.66211 h -28.20703 c -46.53759,0 -84.00391,37.46632 -84.00391,84.00391 v 410.68554 c 0,46.53759 37.46632,84.00391 84.00391,84.00391 h 594.79883 c 46.53759,0 84.00193,-37.46632 84.00193,-84.00391 V 187.66602 c 0,-46.53759 -37.46434,-84.00391 -84.00193,-84.00391 H 891.24023 V -3.6171875 C 891.24023,-153.38128 770.67229,-273.94922 620.9082,-273.94922 Z m -2.97656,87.49805 c 104.10059,0 187.9082,83.80762 187.9082,187.9082012 V 103.66211 H 430.02539 V 1.4570312 c 0,-104.1005812 83.80566,-187.9082012 187.90625,-187.9082012 z"
-       transform="scale(0.26458333)"
-       id="rect833" />
-    <path
-       style="opacity:1;fill:#030f34;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 540.47266,285.92969 a 311.80363,235.50656 0 0 0 -185.5,105.18359 311.80363,235.50656 0 0 0 197.14648,107.53711 127.83612,127.83612 0 0 1 -63.33203,-110.21289 127.83612,127.83612 0 0 1 51.68555,-102.50781 z m 209.51367,12.68164 -19.03321,32.73828 A 127.83612,127.83612 0 0 1 744.45898,388.4375 127.83612,127.83612 0 0 1 677.95508,500.44531 311.80363,235.50656 0 0 0 887.6543,390.98242 311.80363,235.50656 0 0 0 749.98633,298.61133 Z"
-       transform="scale(0.26458333)"
-       id="path4631" />
-    <rect
-       transform="matrix(0.87092789,0.49141084,-0.48814271,0.87276383,0,0)"
-       rx="4.7247782"
-       ry="6.8150487"
-       y="-51.936161"
-       x="194.75136"
-       height="121.93845"
-       width="9.4495564"
-       id="rect4669"
-       style="opacity:1;fill:#030f34;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers" />
-    <ellipse
-       style="opacity:1;fill:#030f34;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       id="path160"
-       cx="148.74577"
-       cy="86.305695"
-       rx="6.0670733"
-       ry="6.1184897" />
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" version="1.1" viewBox="0 0 135.47 135.47" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="linearGradient4825" x1="228.57" x2="1060" y1="328.23" y2="172.52" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#da892f" offset="0"/>
+   <stop stop-color="#bbc027" offset="1"/>
+  </linearGradient>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+    <cc:license rdf:resource="http://creativecommons.org/licenses/by/4.0/"/>
+   </cc:Work>
+   <cc:License rdf:about="http://creativecommons.org/licenses/by/4.0/">
+    <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+    <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+    <cc:requires rdf:resource="http://creativecommons.org/ns#Notice"/>
+    <cc:requires rdf:resource="http://creativecommons.org/ns#Attribution"/>
+    <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+   </cc:License>
+  </rdf:RDF>
+ </metadata>
+ <g transform="matrix(.53539 0 0 .53539 -20.061 38.807)">
+  <path transform="scale(.26458)" d="m620.91-273.95c-149.76 0-270.33 120.57-270.33 270.33v107.28h-28.207c-46.538 0-84.004 37.466-84.004 84.004v410.69c0 46.538 37.466 84.004 84.004 84.004h594.8c46.538 0 84.002-37.466 84.002-84.004v-410.69c0-46.538-37.464-84.004-84.002-84.004h-25.928v-107.28c0-149.76-120.57-270.33-270.33-270.33zm-2.9766 87.498c104.1 0 187.91 83.808 187.91 187.91v102.21h-375.81v-102.21c0-104.1 83.806-187.91 187.91-187.91z" fill="url(#linearGradient4825)" style="paint-order:stroke fill markers"/>
+  <g fill="#030f34">
+   <path transform="scale(.26458)" d="m540.47 285.93a311.8 235.51 0 0 0-185.5 105.18 311.8 235.51 0 0 0 197.15 107.54 127.84 127.84 0 0 1-63.332-110.21 127.84 127.84 0 0 1 51.686-102.51zm209.51 12.682-19.033 32.738a127.84 127.84 0 0 1 13.506 57.088 127.84 127.84 0 0 1-66.504 112.01 311.8 235.51 0 0 0 209.7-109.46 311.8 235.51 0 0 0-137.67-92.371z" style="paint-order:stroke fill markers"/>
+   <rect transform="matrix(.87093 .49141 -.48814 .87276 0 0)" x="194.75" y="-51.936" width="9.4496" height="121.94" rx="4.7248" ry="6.815" style="paint-order:stroke fill markers"/>
+   <ellipse cx="148.75" cy="86.306" rx="6.0671" ry="6.1185" style="paint-order:stroke fill markers"/>
   </g>
+ </g>
 </svg>

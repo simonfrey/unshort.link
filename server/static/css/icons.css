@@ -7,6 +7,7 @@ i[class*="icon"] {
 
 i.logo {
   display: inline-block;
+  flex-shrink: 0;
   width: 128px;
   height: 128px;
   background-size: 128px 128px;
