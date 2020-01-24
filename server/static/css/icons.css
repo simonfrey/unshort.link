@@ -5,6 +5,14 @@ i[class*="icon"] {
   background-size: 48px 48px;
 }
 
+i.logo {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 128px;
+  height: 128px;
+  background-size: 128px 128px;
+  background-image: url(/static/icons/unshortlink.svg);
+}
 i.icon-cookie {
   background-image: url(/static/icons/cookie-bite.svg);
 }
@@ -26,14 +34,14 @@ i.icon-branch {
 i.icon-firefox {
   background-image: url(/static/icons/firefox.svg);
 }
-i.icon-firefox-white {
-  background-image: url(/static/icons/firefox_white.svg);
+i.icon-firefox-black {
+  background-image: url(/static/icons/firefox_black.svg);
 }
 i.icon-chrome {
   background-image: url(/static/icons/chrome.svg);
 }
-i.icon-chrome-white {
-  background-image: url(/static/icons/chrome_white.svg);
+i.icon-chrome-black {
+  background-image: url(/static/icons/chrome_black.svg);
 }
 i.icon-globe {
   background-image: url(/static/icons/globe.svg);
