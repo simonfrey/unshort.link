@@ -1,12 +1,6 @@
 # Unshort.link
 Prevent short link services from tracking you by un shortening the urls for your. Try it on [unshort.link](https://unshort.link)
 
-```
-**Logo Design help wanted**
-
-It would be awesome to have a custom logo for unshort.link as it is required for the Firefox & Chrome webstores. The current one is just copied from flaticon.
-```
-
 ## Features
 
 - Access short links for you to prevent the short link providers to track you
