@@ -28,9 +28,19 @@
     <button class="btn btn-primary" type="submit" id="unshortDirectButton">
         unshorten
     </button>
-    <script>
+
+</div>
+            <div id="headerLinks">
+            <p id="gt-browser">Get automatic protection via the browser extension</p>
+                <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><i class="icon-firefox-black"></i></a>
+        <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><i class="icon-chrome-black"></i></a>
+    </div>
+
+
+     <script>
         let buttonDirectElement = document.getElementById("unshortDirectButton");
         let urlDirectElement = document.getElementById("urlDirect");
+        let headerLinks = document.getElementById("headerLinks");
         function handleAction() {
             if (urlDirectElement.value != "") {
                 window.location.href = "/d/" + urlDirectElement.value;
@@ -43,12 +53,17 @@
             window.location.href = "/d/https://tinyurl.com/yyy63fz9";
         }
 
+        var extensionURL =  "https://tinyurl.com/v43klgn";
         if (navigator.userAgent.indexOf("Firefox") != -1) {
-            urlDirectElement.placeholder = "https://tinyurl.com/qlhjpjn"
-        } else {
-            urlDirectElement.placeholder = "https://tinyurl.com/v43klgn"
+           extensionURL = "https://tinyurl.com/qlhjpjn"
         }
         
+
+        urlDirectElement.placeholder = extensionURL;
+        headerLinks.addEventListener("click", function(){
+            window.location.href = extensionURL;
+        });
+
         buttonDirectElement.addEventListener("click", handleAction);
         urlDirectElement.addEventListener("keyup", function(event) {
             // only on enter key
@@ -57,13 +72,6 @@
             }
         });
     </script>
-</div>
- 
-            <div id="headerLinks">
-            <p id="gt-browser">Get automatic protection via the browser extension</p>
-                <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><i class="icon-firefox-black"></i></a>
-        <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><i class="icon-chrome-black"></i></a>
-    </div>
 {{end}}
 {{define "notes"}}
 {{end}}
