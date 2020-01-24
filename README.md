@@ -18,6 +18,7 @@ It would be awesome to have a custom logo for unshort.link as it is required for
 
 Thanks to all the following contributors for their work on unshort.link!
 
+- [roket1428](https://github.com/roket1428) for the logo and the dark design (Jan 2020)
 - [cyantarek](https://github.com/cyantarek) for adding the makefile 
 - [Jakob-em](https://github.com/Jakob-em) for periodically reloading the blacklist & UI improvements (Jan 2020)
 - [billcobbler](https://github.com/billcobbler) for the dockerization of the server (Jan 2020)
