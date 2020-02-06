@@ -52,7 +52,11 @@ func (l Loader) load(updateTimestamp time.Time) {
 		}
 		scanner := bufio.NewScanner(resp.Body)
 		for scanner.Scan() {
-			hostsToInsert[nextIndex%batchSize] = scanner.Text()
+			t := scanner.Text()
+			if t[0] == '#' {
+				continue
+			}
+			hostsToInsert[nextIndex%batchSize] = t
 			nextIndex++
 			if nextIndex%batchSize == 0 {
 				l.repo.addBatchToDB(hostsToInsert, updateTimestamp)
