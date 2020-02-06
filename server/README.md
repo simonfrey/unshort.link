@@ -59,3 +59,13 @@ Or use `make test` command
 
 ### How to clean generated files and db
 Just run `make clean` from the command line.
+
+## Blacklists
+
+Following blacklists are supported by unshort.link (and all others with the same format: `One url per line` and `# at position 0 for marking comments`)
+- Ultimate Hosts Blacklist: [Data](https://hosts.ubuntu101.co.za/domains.list) ([Info](https://github.com/mitchellkrogza/Ultimate.Hosts.Blacklist))
+- URLhaus: [Data](https://urlhaus.abuse.ch/downloads/text_online/) ([Info](https://urlhaus.abuse.ch/))
+- DShield.org Suspicious Domain List: [Data](https://www.dshield.org/feeds/suspiciousdomains_Low.txt) ([Info](https://dshield.org/suspicious_domains.html))
+
+
+
