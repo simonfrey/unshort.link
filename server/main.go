@@ -44,6 +44,12 @@ func main() {
 			path == "/api/" || path == "/api" ||
 			path == "/nb/" || path == "/nb":
 			handleIndex(rw, true)
+		case path == "/about":
+			browserExtension := false
+			if req.URL.Query().Get("extension") == "true" {
+				browserExtension = true
+			}
+			handleAbout(rw, browserExtension)
 		case strings.HasPrefix(path, "favicon.ico"):
 			rw.WriteHeader(http.StatusNotFound)
 		case strings.HasPrefix(path, "/providers"):

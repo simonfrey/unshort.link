@@ -21,17 +21,41 @@ func init() {
 }
 
 type TemplateVars struct {
-	ServerUrl      string
-	ShortUrl       string
-	FeedbackBody   string
-	LongUrl        string
-	Error          string
-	DirectRedirect bool
-	LinkCount      int
+	ServerUrl        string
+	ShortUrl         string
+	FeedbackBody     string
+	LongUrl          string
+	Error            string
+	DirectRedirect   bool
+	BrowserExtension bool
+	LinkCount        int
 }
 
 type blacklistSource interface {
 	IsBlacklisted(url string) bool
+}
+
+func handleAbout(rw http.ResponseWriter, browserExtension bool) {
+	renderLoading(rw)
+
+	linkCount, err := db.GetLinkCount()
+	if err != nil {
+		handleError(rw, errors.Wrap(err, "Could not get link count"), false)
+		return
+	}
+	linkCount = linkCount - (linkCount % 500)
+
+	err = renderTemplate(rw,
+		append(
+			_escFSMustByte(useLocal, "/static/about.html"),
+			_escFSMustByte(useLocal, "/static/main.html")...,
+		),
+		TemplateVars{ServerUrl: serveUrl, BrowserExtension: browserExtension},
+	)
+	if err != nil {
+		handleError(rw, errors.Wrap(err, "Could not render template"), false)
+		return
+	}
 }
 
 func handleIndex(rw http.ResponseWriter, renderLoadingHTML bool) {

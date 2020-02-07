@@ -1,0 +1,69 @@
+{{define "description"}}
+
+
+{{end}}
+{{define "action"}}
+    <p class="top-banner-subtitle">How does unshort.link work?</p>
+    <img src="/static/img/about_unshort.png">
+
+
+    <p>Unshort.link acts as proxy between you and the short link providers. <br>
+        Because of this the providers do not get your data and can't track you.</p>
+    <p><a href="https://www.youtube.com/watch?v=Sdl3A9VCWrY" target="_blank">🎥<b> Watch Simon explain more about unshort.link (Youtube) </b>🎥</a></p>
+{{if .BrowserExtension}}
+    <p>Try out unshort.link by clicking on the short link below<br>It will redirect you to duckduckgo.com</p>
+<a href="https://bit.ly/2vWBObr" target="_blank"><div id="headerLinks" >https://bit.ly/2vWBObr</div></a>
+
+        {{else}}
+        <div id="headerLinks">
+
+        <p id="gt-browser">Get automatic protection via the browser extension</p>
+        <a href="https://addons.mozilla.org/en-US/firefox/addon/unshort-link/"><i class="icon-firefox-black"></i></a>
+        <a href="https://chrome.google.com/webstore/detail/unshortlink-free-link-uns/neigokajpjlcgjddjbkngpkmjgdgmcch"><i class="icon-chrome-black"></i></a>
+        </div>
+
+{{end}}
+
+
+
+    {{if not .BrowserExtension}}
+
+    <script>
+        let buttonDirectElement = document.getElementById("unshortDirectButton");
+        let urlDirectElement = document.getElementById("urlDirect");
+        let headerLinks = document.getElementById("headerLinks");
+        function handleAction() {
+            if (urlDirectElement.value != "") {
+                window.location.href = "/d/" + urlDirectElement.value;
+                return;
+            }
+            if(urlDirectElement.placeholder != "") {
+                window.location.href = "/d/" + urlDirectElement.placeholder;
+                return;
+            }
+            window.location.href = "/d/https://tinyurl.com/yyy63fz9";
+        }
+
+        var extensionURL =  "https://tinyurl.com/v43klgn";
+        if (navigator.userAgent.indexOf("Firefox") != -1) {
+            extensionURL = "https://tinyurl.com/qlhjpjn"
+        }
+
+
+        urlDirectElement.placeholder = extensionURL;
+        headerLinks.addEventListener("click", function(){
+            window.location.href = extensionURL;
+        });
+
+        buttonDirectElement.addEventListener("click", handleAction);
+        urlDirectElement.addEventListener("keyup", function(event) {
+            // only on enter key
+            if(event.keyCode === 13) {
+                handleAction();
+            }
+        });
+    </script>
+{{end}}
+{{end}}
+{{define "notes"}}
+{{end}}

@@ -262,6 +262,10 @@ p#gt-browser {
     margin:auto;
 }
 
+#moreAboutUnshort{
+    margin:auto;
+}
+
 @-webkit-keyframes gradient-animation {
     0%{background-position:0% 41%}
     50%{background-position:100% 60%}
