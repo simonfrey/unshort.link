@@ -37,7 +37,7 @@ type blacklistSource interface {
 
 func handleAbout(rw http.ResponseWriter, browserExtension bool) {
 	renderLoading(rw)
-	err = renderTemplate(rw,
+	err := renderTemplate(rw,
 		append(
 			_escFSMustByte(useLocal, "/static/about.html"),
 			_escFSMustByte(useLocal, "/static/main.html")...,
