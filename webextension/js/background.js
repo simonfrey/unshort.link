@@ -1,11 +1,11 @@
-var unshortPattern = "https://unshort.link";
+var unshortBaseURL = "https://unshort.link";
 var directRedirect = false;
 var doNotCheckBlacklist = false;
 var active = true;
 
 function loadOptions() {
     function setData(result) {
-        unshortPattern = result.serverUrl || "https://unshort.link";
+        unshortBaseURL = result.serverUrl || "https://unshort.link";
         directRedirect = result.directRedirect || false;
         doNotCheckBlacklist = result.doNotCheckBlacklist || false;
     }
@@ -28,10 +28,10 @@ function redirect(requestDetails) {
         var l = document.createElement("a");
         l.href = requestDetails.originUrl;
         if (
-            requestDetails.originUrl.startsWith(unshortPattern) ||
+            requestDetails.originUrl.startsWith(unshortBaseURL) ||
             requestDetails.url.includes(l.hostname)
         ) {
-            console.log("Skip unshort because origin is " + unshortPattern);
+            console.log("Skip unshort because origin is " + unshortBaseURL);
             return;
         }
     }
@@ -45,13 +45,13 @@ function redirect(requestDetails) {
         p = "/nb/";
     }
     return {
-        redirectUrl: unshortPattern + p + requestDetails.url
+        redirectUrl: unshortBaseURL + p + requestDetails.url
     };
 }
 
 // Load available services from server
 var req = new XMLHttpRequest();
-req.open("GET", unshortPattern + "/providers", true);
+req.open("GET", unshortBaseURL + "/providers", true);
 req.addEventListener("load", function() {
     let servicesUrls = [];
 
@@ -78,3 +78,13 @@ chrome.browserAction.onClicked.addListener(function() {
         chrome.browserAction.setIcon({ path: "icons/128.png" });
     }
 });
+
+
+function handleInstalled(details) {
+    if (details.reason == "install") {
+        chrome.tabs.create({
+            url: unshortBaseURL + "/about?extension=true"
+        });
+    }
+}
+chrome.runtime.onInstalled.addListener(handleInstalled);
