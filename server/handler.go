@@ -37,14 +37,6 @@ type blacklistSource interface {
 
 func handleAbout(rw http.ResponseWriter, browserExtension bool) {
 	renderLoading(rw)
-
-	linkCount, err := db.GetLinkCount()
-	if err != nil {
-		handleError(rw, errors.Wrap(err, "Could not get link count"), false)
-		return
-	}
-	linkCount = linkCount - (linkCount % 500)
-
 	err = renderTemplate(rw,
 		append(
 			_escFSMustByte(useLocal, "/static/about.html"),
