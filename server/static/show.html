@@ -21,10 +21,10 @@
         let linkButton = document.getElementById("buttonRedirect");
         let editNote = document.getElementById("editNote");
         var pressTimer;
-       linkButton.onmouseup = function(){
+       linkButton.onpointerup = function(){
             clearTimeout(pressTimer);
         };
-        linkButton.onmousedown = function(){
+        linkButton.onpointerdown = function(){
             pressTimer = window.setTimeout(function() {
                 linkText.style.display="block";
                 linkButton.style.display="none";
