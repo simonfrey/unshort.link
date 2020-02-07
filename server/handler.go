@@ -141,7 +141,7 @@ func renderTemplate(rw io.Writer, templateBytes []byte, vars TemplateVars) error
 	return nil
 }
 
-func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool, blacklistSource blacklistSource) {
+func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, checkBlacklist bool, blacklistSource blacklistSource) {
 	if !api {
 		renderLoading(rw)
 	}
@@ -201,7 +201,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api bool
 		return
 	}
 
-	if endUrl.Blacklisted {
+	if checkBlacklist && endUrl.Blacklisted {
 		handleShowBlacklistPage(rw, endUrl, api)
 		return
 	}
