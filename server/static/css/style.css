@@ -193,6 +193,8 @@ p#gt-browser {
 #buttonRedirect {
     max-width: 800px;
     word-break: break-all;
+    display: block;
+    margin:auto;
 }
 
 #blacklisted h2, #blacklisted i {
@@ -241,6 +243,7 @@ p#gt-browser {
 
 #loadingSpinner img {
     width: 100%;
+
 }
 
 #loadingSpinner #loadingText {
@@ -248,6 +251,15 @@ p#gt-browser {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#redirectLinkTextArea{
+    width:100%;
+    max-width: 800px;
+    word-break: break-all;
+    text-align: center;
+    display: none;
+    margin:auto;
 }
 
 @-webkit-keyframes gradient-animation {
