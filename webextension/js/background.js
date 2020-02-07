@@ -1,14 +1,7 @@
-// Set unshort server
 var unshortPattern = "https://unshort.link";
 var directRedirect = false;
 var doNotCheckBlacklist = false;
 var active = true;
-
-function getHostname(href) {
-    var l = document.createElement("a");
-    l.href = href;
-    return l;
-}
 
 function loadOptions() {
     function setData(result) {
@@ -16,12 +9,10 @@ function loadOptions() {
         directRedirect = result.directRedirect || false;
         doNotCheckBlacklist = result.doNotCheckBlacklist || false;
     }
-
-    function onError(error) {
-        alert(`Unshort.link Error: ${error}`);
-    }
-
-    browser.storage.sync.get(["serverUrl", "directRedirect", "doNotCheckBlacklist"]).then(setData, onError);
+    chrome.storage.sync.get(
+        ["serverUrl", "directRedirect", "doNotCheckBlacklist"],
+        setData
+    );
 }
 
 loadOptions();
@@ -45,7 +36,6 @@ function redirect(requestDetails) {
         }
     }
     console.log("Unshort: ", requestDetails.url);
-
     var p = "/d/";
     if (directRedirect) {
         console.log("direct redirect");
@@ -54,7 +44,6 @@ function redirect(requestDetails) {
         console.log("do not check blacklist");
         p = "/nb/";
     }
-
     return {
         redirectUrl: unshortPattern + p + requestDetails.url
     };
@@ -74,9 +63,7 @@ req.addEventListener("load", function() {
         servicesUrls.push("*://" + item + "/*");
     });
 
-    console.log(servicesUrls);
-
-    browser.webRequest.onBeforeRequest.addListener(
+    chrome.webRequest.onBeforeRequest.addListener(
         redirect, { urls: servicesUrls }, ["blocking"]
     );
 });

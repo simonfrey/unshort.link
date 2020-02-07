@@ -11,5 +11,5 @@ require (
 	github.com/sergi/go-diff v1.1.0
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.4.0
-	golang.org/x/tools v0.0.0-20200123162537-45e69182d161 // indirect
+	golang.org/x/tools v0.0.0-20200124021010-5c352bb417e0 // indirect
 )
