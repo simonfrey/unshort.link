@@ -24,6 +24,8 @@ var (
 	metaRedirectRegex *regexp.Regexp
 )
 
+const MAX_PARAMETER_COUNT = 15
+
 func init() {
 	hClient = http.Client{
 		Timeout: 3 * time.Second,
@@ -58,7 +60,6 @@ func getUrl(inUrl *url.URL) (*db.UnShortUrl, error) {
 
 	// Remove known tracking parameter e.g. utm_source
 	queryParams = removeKnownBadParams(queryParams)
-
 	queryParamSet := combinations(queryParams)
 
 	wg := sync.WaitGroup{}
@@ -66,7 +67,7 @@ func getUrl(inUrl *url.URL) (*db.UnShortUrl, error) {
 	breakCtx, cancelFunc := context.WithTimeout(context.Background(), 2*time.Second)
 	rateLimitChan := make(chan bool, 5)
 	for k, parameters := range queryParamSet {
-		if k >= 15 {
+		if k >= MAX_PARAMETER_COUNT {
 			break
 		}
 
@@ -185,6 +186,9 @@ func combinations(set []string) (subsets subsets) {
 		}
 		// add subset to subsets
 		subsets = append(subsets, subset)
+		if len(subsets) >= MAX_PARAMETER_COUNT {
+			break
+		}
 	}
 
 	subsets = append(subsets, []string{})
