@@ -67,7 +67,7 @@ func main() {
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/nb")
 			handleUnShort(rw, req, false, false, false, blacklistSource)
 		default:
-			handleUnShort(rw, req, false, false, true, blacklistSource)
+			handleUnShort(rw, req, true, false, true, blacklistSource)
 		}
 	}
 
