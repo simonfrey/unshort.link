@@ -21,8 +21,8 @@ dev: clean
 store: dev
 	@echo "Building..."
 	@mkdir store
-	@ zip store/unshort_link.firefox.zip dev/firefox/* -r
-	@ zip store/unshort_link.chrome.zip dev/chrome/* -r
+	@cd dev/firefox/ && zip ../../store/unshort_link.firefox.zip * -r
+	@cd dev/chrome && zip ../../store/unshort_link.chrome.zip * -r
 	@echo "Build completed. Get the zips from ./store directory"
 
 clean:
