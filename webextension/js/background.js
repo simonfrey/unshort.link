@@ -3,19 +3,43 @@ var directRedirect = false;
 var doNotCheckBlacklist = false;
 var active = true;
 
-function loadOptions() {
+// Load options via async storage API
+var loadOptions = new Promise((resolve) => {
     function setData(result) {
         unshortBaseURL = result.serverUrl || "https://unshort.link";
         directRedirect = result.directRedirect || false;
         doNotCheckBlacklist = result.doNotCheckBlacklist || false;
+        resolve();
     }
     chrome.storage.sync.get(
         ["serverUrl", "directRedirect", "doNotCheckBlacklist"],
         setData
     );
+});
+
+// Load available services from server
+function loadProviders() {
+    var req = new XMLHttpRequest();
+    req.open("GET", unshortBaseURL + "/providers", true);
+    req.addEventListener("load", function() {
+        let servicesUrls = [];
+
+        let services = JSON.parse(req.response);
+        services.forEach(function(item, index) {
+            if (item.length == 0) {
+                return;
+            }
+            servicesUrls.push("*://" + item + "/*");
+        });
+
+        chrome.webRequest.onBeforeRequest.addListener(
+            redirect, { urls: servicesUrls }, ["blocking"]
+        );
+    });
+    req.send(null);
 }
 
-loadOptions();
+loadOptions.then(loadProviders);
 
 // Redirect services via unshort.link
 function redirect(requestDetails) {
@@ -49,26 +73,6 @@ function redirect(requestDetails) {
     };
 }
 
-// Load available services from server
-var req = new XMLHttpRequest();
-req.open("GET", unshortBaseURL + "/providers", true);
-req.addEventListener("load", function() {
-    let servicesUrls = [];
-
-    let services = JSON.parse(req.response);
-    services.forEach(function(item, index) {
-        if (item.length == 0) {
-            return;
-        }
-        servicesUrls.push("*://" + item + "/*");
-    });
-
-    chrome.webRequest.onBeforeRequest.addListener(
-        redirect, { urls: servicesUrls }, ["blocking"]
-    );
-});
-req.send(null);
-
 chrome.browserAction.onClicked.addListener(function() {
     if (active) {
         active = false;
@@ -78,7 +82,6 @@ chrome.browserAction.onClicked.addListener(function() {
         chrome.browserAction.setIcon({ path: "icons/128.png" });
     }
 });
-
 
 function handleInstalled(details) {
     if (details.reason == "install") {
