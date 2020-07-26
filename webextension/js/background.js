@@ -2,6 +2,7 @@ var unshortBaseURL = "https://unshort.link";
 var directRedirect = false;
 var doNotCheckBlacklist = false;
 var active = true;
+var tabIdUrls = {}
 
 // Load options via async storage API
 var loadOptions = new Promise((resolve) => {
@@ -41,6 +42,7 @@ function loadProviders() {
 
 loadOptions.then(loadProviders);
 
+
 // Redirect services via unshort.link
 function redirect(requestDetails) {
     if (!active) {
@@ -59,6 +61,20 @@ function redirect(requestDetails) {
             return;
         }
     }
+
+
+    // Check if we did see the same hostname in the last 10 seconds. If yes, no redirect
+    var r = document.createElement("a");
+    r.href = requestDetails.url;
+    if (tabIdUrls[requestDetails.tabId] != undefined){
+        const lastReq = tabIdUrls[requestDetails.tabId];
+        if (lastReq.hostname == r.hostname && lastReq.timestamp > (new Date())-10000){
+            console.log("Same host name as in last 10 sec " + r.hostname);
+            return;
+        }
+    }
+    tabIdUrls[requestDetails.tabId] = {hostname:r.hostname,timestamp:new Date()}
+
     console.log("Unshort: ", requestDetails.url);
     var p = "/d/";
     if (directRedirect) {
