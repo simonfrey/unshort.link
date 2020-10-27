@@ -6,9 +6,11 @@ import (
 	"fmt"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
+	"golang.org/x/net/publicsuffix"
 	"io"
 	"io/ioutil"
 	"net/http"
+	"net/http/cookiejar"
 	"net/url"
 	"regexp"
 	"sort"
@@ -19,7 +21,6 @@ import (
 )
 
 var (
-	hClient           http.Client
 	badParams         []string
 	metaRedirectRegex *regexp.Regexp
 )
@@ -27,11 +28,7 @@ var (
 const MAX_PARAMETER_COUNT = 15
 
 func init() {
-	hClient = http.Client{
-		Timeout: 3 * time.Second,
-	}
-
-	metaRedirectRegex = regexp.MustCompile(`<.*?(?:(?:http-equiv="refresh".*?content=".*?(?:url|URL)=(.*?)")|(?:content=".*?(?:url|URL)=(.*?)".*?http-equiv="refresh")).*?>`)
+	metaRedirectRegex = regexp.MustCompile(`<.*?(?:(?:http-equiv="refresh".*?content=".*?(?:url|URL)='?(.*?)'?")|(?:content=".*?(?:url|URL)='?(.*?)'?".*?http-equiv="refresh")).*?>`)
 	badParams = []string{"feature=youtu.be", "utm_source", "utm_medium", "utm_term", "utm_content", "utm_campaign", "utm_reader", "utm_place", "utm_userid", "utm_cid", "utm_name", "utm_pubreferrer", "utm_swu", "utm_viz_id", "ga_source", "ga_medium", "ga_term", "ga_content", "ga_campaign", "ga_place", "yclid", "_openstat", "fb_action_ids", "fb_action_types", "fb_ref", "fb_source", "action_object_map", "action_type_map", "action_ref_map", "gs_l", "pd_rd_@amazon.", "_encoding@amazon.", "psc@amazon.", "ved@google.", "ei@google.", "sei@google.", "gws_rd@google.", "cvid@bing.com", "form@bing.com", "sk@bing.com", "sp@bing.com", "sc@bing.com", "qs@bing.com", "pq@bing.com", "feature@youtube.com", "gclid@youtube.com", "kw@youtube.com", "$/ref@amazon.", "_hsenc", "mkt_tok", "hmb_campaign", "hmb_medium", "hmb_source", "source@sourceforge.net", "position@sourceforge.net", "callback@bilibili.com", "elqTrackId", "elqTrack", "assetType", "assetId", "recipientId", "campaignId", "siteId", "tag@amazon.", "ref_@amazon.", "pf_rd_@amazon.", "spm@.aliexpress.com", "scm@.aliexpress.com", "aff_platform", "aff_trace_key", "terminal_id", "_hsmi", "fbclid", "spReportId", "spJobID", "spUserID", "spMailingID", "utm_mailing", "utm_brand", "CNDID", "mbid", "trk", "trkCampaign", "sc_campaign", "sc_channel", "sc_content", "sc_medium", "sc_outcome", "sc_geo", "sc_country", "ocid", "pd_rd_r@amazon_encoding", "pd_rd_w@amazon.", "pd_rd_wg@amazon."}
 }
 
@@ -40,7 +37,16 @@ func getUrl(inUrl *url.URL) (*db.UnShortUrl, error) {
 		inUrl.Scheme = "http"
 	}
 
-	resp, baseBody, err := getWithRedirects(inUrl, 10)
+	jar, err := cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
+	if err != nil {
+		return nil, errors.Wrap(err, "could not create cookiejar")
+	}
+	hClient := &http.Client{
+		Timeout: 10 * time.Second,
+		Jar:     jar,
+	}
+
+	resp, baseBody, err := getWithRedirects(inUrl, hClient, 10)
 	if err != nil {
 		return nil, errors.Wrap(err, "Could not get base")
 	}
@@ -202,7 +208,8 @@ func (s subsets) Len() int           { return len(s) }
 func (s subsets) Less(i, j int) bool { return len(s[i]) < len(s[j]) }
 func (s subsets) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 
-func getWithRedirects(inUrl *url.URL, maxTries int) (res *http.Response, body []byte, err error) {
+func getWithRedirects(inUrl *url.URL, hClient *http.Client, maxTries int) (res *http.Response, body []byte, err error) {
+
 	req, err := http.NewRequest("GET", inUrl.String(), nil)
 	if err != nil {
 		return nil, nil, errors.Wrap(err, "Could not create http request")
@@ -236,7 +243,7 @@ func getWithRedirects(inUrl *url.URL, maxTries int) (res *http.Response, body []
 		}
 		u, err := url.ParseRequestURI(d)
 		if err == nil && u.Scheme != "" && u.Host != "" && maxTries > 0 {
-			return getWithRedirects(u, maxTries-1)
+			return getWithRedirects(u, hClient, maxTries-1)
 		}
 	}
 
