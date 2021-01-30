@@ -1,5 +1,7 @@
 # Unshort.link Server
 
+[💵 Please consider supporting this project to keep it up and running 💵](https://gum.co/unshortlink)
+
 This is the backend service running [unshort.link](https://unshort.link). You can build & run it yourself for even better privacy
 
 ## Building
