@@ -1,4 +1,8 @@
 # Unshort.link
+
+[💵 Please consider supporting this project to keep it up and running 💵](https://gum.co/unshortlink)
+
+
 Prevent short link services from tracking you by un shortening the urls for your. Try it on [unshort.link](https://unshort.link)
 
 ## Features

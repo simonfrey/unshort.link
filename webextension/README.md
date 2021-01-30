@@ -1,5 +1,7 @@
 # Unshort.link Webextension
 
+[💵 Please consider supporting this project to keep it up and running 💵](https://gum.co/unshortlink)
+
 This webextension uses [unshort.link](https://unshort.link) as backend service to automatically protect you by unshortening short links and show you where they are pointing at.
 
 ## Build
