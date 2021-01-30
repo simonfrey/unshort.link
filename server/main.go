@@ -14,7 +14,7 @@ import (
 //go:generate go get -u github.com/programmfabrik/esc
 //go:generate esc -private -local-prefix-cwd -pkg=main -o=static.go static/
 
-var serveUrl, port string
+var serveUrl, port, supportUrl string
 var useLocal bool
 var blacklistSyncInterval time.Duration
 var blacklistUrls []string
@@ -23,6 +23,7 @@ func init() {
 	flag.BoolVar(&useLocal, "local", false, "Use assets from local filesystem")
 	flag.StringVar(&serveUrl, "url", "http://localhost:8080", "The server url this server runs on. (Required for the frontend)")
 	flag.StringVar(&port, "port", "8080", "Port to run the server on")
+	flag.StringVar(&supportUrl, "support-url", "", "Url to display in support notice")
 	flag.DurationVar(&blacklistSyncInterval, "sync", time.Hour, "Blacklist synchronization interval")
 	rawBlacklistUrls := flag.String("blacklist-sources", "https://hosts.ubuntu101.co.za/domains.list", "Comma separated list of blacklist urls to periodically sync")
 	flag.Parse()
@@ -59,15 +60,15 @@ func main() {
 			handleProviders(rw)
 		case strings.HasPrefix(path, "/api/"):
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/api")
-			handleUnShort(rw, req, false, true, true, blacklistSource)
+			handleUnShort(rw, req, false, true, true, blacklistSource, supportUrl)
 		case strings.HasPrefix(path, "/d/"):
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/d")
-			handleUnShort(rw, req, false, false, true, blacklistSource)
+			handleUnShort(rw, req, false, false, true, blacklistSource, supportUrl)
 		case strings.HasPrefix(path, "/nb/"):
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/nb")
-			handleUnShort(rw, req, false, false, false, blacklistSource)
+			handleUnShort(rw, req, false, false, false, blacklistSource, supportUrl)
 		default:
-			handleUnShort(rw, req, true, false, true, blacklistSource)
+			handleUnShort(rw, req, true, false, true, blacklistSource, supportUrl)
 		}
 	}
 

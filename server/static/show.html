@@ -9,6 +9,11 @@
       <p>You got here because you opened the short url<br>
         <a href="{{.ShortUrl}}">{{.ShortUrl}}</a>
         </p>
+
+        {{if ne "" .SupportUrl}}
+        <p><a href="{{.SupportUrl}}">💵 Please consider supporting this unshort.link server to keep it up and running 💵</a>
+        </p>
+        {{end}}
         <a href="{{.LongUrl}}" class="btn btn-lg btn-primary" type="submit" id="buttonRedirect">
         Redirect to<br><span>{{.LongUrl}}</span>
         </a>

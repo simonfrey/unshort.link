@@ -22,6 +22,7 @@ func init() {
 
 type TemplateVars struct {
 	ServerUrl        string
+	SupportUrl       string
 	ShortUrl         string
 	FeedbackBody     string
 	LongUrl          string
@@ -75,7 +76,7 @@ func handleIndex(rw http.ResponseWriter, renderLoadingHTML bool) {
 	}
 }
 
-func handleShowRedirectPage(rw http.ResponseWriter, u *db.UnShortUrl, renderLoadingHTML, directRedirect bool) {
+func handleShowRedirectPage(rw http.ResponseWriter, u *db.UnShortUrl, renderLoadingHTML, directRedirect bool, supportUrl string) {
 	if renderLoadingHTML {
 		renderLoading(rw)
 	}
@@ -88,6 +89,7 @@ func handleShowRedirectPage(rw http.ResponseWriter, u *db.UnShortUrl, renderLoad
 		TemplateVars{DirectRedirect: directRedirect,
 			LongUrl:      u.LongUrl.String(),
 			ShortUrl:     u.ShortUrl.String(),
+			SupportUrl:   supportUrl,
 			FeedbackBody: fmt.Sprintf("\n\n\n-----\nShort Url: %s\nLong Url: %s", u.ShortUrl.String(), u.LongUrl.String())},
 	)
 	if err != nil {
@@ -157,7 +159,7 @@ func renderTemplate(rw io.Writer, templateBytes []byte, vars TemplateVars) error
 	return nil
 }
 
-func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, checkBlacklist bool, blacklistSource blacklistSource) {
+func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, checkBlacklist bool, blacklistSource blacklistSource, supportUrl string) {
 	if !api {
 		renderLoading(rw)
 	}
@@ -222,7 +224,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, che
 		return
 	}
 
-	handleShowRedirectPage(rw, endUrl, api, redirect)
+	handleShowRedirectPage(rw, endUrl, api, redirect, supportUrl)
 }
 
 func handleProviders(rw http.ResponseWriter) {
