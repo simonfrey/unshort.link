@@ -27,6 +27,8 @@ var (
 
 const MAX_PARAMETER_COUNT = 15
 
+var userAgents = []string{"", "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1", "Mozilla/5.0 (Windows NT 10.0; Win32; x86) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"}
+
 func init() {
 	metaRedirectRegex = regexp.MustCompile(`<.*?(?:(?:http-equiv="refresh".*?content=".*?(?:url|URL)='?(.*?)'?")|(?:content=".*?(?:url|URL)='?(.*?)'?".*?http-equiv="refresh")).*?>`)
 	badParams = []string{"feature=youtu.be", "utm_source", "utm_medium", "utm_term", "utm_content", "utm_campaign", "utm_reader", "utm_place", "utm_userid", "utm_cid", "utm_name", "utm_pubreferrer", "utm_swu", "utm_viz_id", "ga_source", "ga_medium", "ga_term", "ga_content", "ga_campaign", "ga_place", "yclid", "_openstat", "fb_action_ids", "fb_action_types", "fb_ref", "fb_source", "action_object_map", "action_type_map", "action_ref_map", "gs_l", "pd_rd_@amazon.", "_encoding@amazon.", "psc@amazon.", "ved@google.", "ei@google.", "sei@google.", "gws_rd@google.", "cvid@bing.com", "form@bing.com", "sk@bing.com", "sp@bing.com", "sc@bing.com", "qs@bing.com", "pq@bing.com", "feature@youtube.com", "gclid@youtube.com", "kw@youtube.com", "$/ref@amazon.", "_hsenc", "mkt_tok", "hmb_campaign", "hmb_medium", "hmb_source", "source@sourceforge.net", "position@sourceforge.net", "callback@bilibili.com", "elqTrackId", "elqTrack", "assetType", "assetId", "recipientId", "campaignId", "siteId", "tag@amazon.", "ref_@amazon.", "pf_rd_@amazon.", "spm@.aliexpress.com", "scm@.aliexpress.com", "aff_platform", "aff_trace_key", "terminal_id", "_hsmi", "fbclid", "spReportId", "spJobID", "spUserID", "spMailingID", "utm_mailing", "utm_brand", "CNDID", "mbid", "trk", "trkCampaign", "sc_campaign", "sc_channel", "sc_content", "sc_medium", "sc_outcome", "sc_geo", "sc_country", "ocid", "pd_rd_r@amazon_encoding", "pd_rd_w@amazon.", "pd_rd_wg@amazon."}
@@ -210,15 +212,24 @@ func (s subsets) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 
 func getWithRedirects(inUrl *url.URL, hClient *http.Client, maxTries int) (res *http.Response, body []byte, err error) {
 
-	req, err := http.NewRequest("GET", inUrl.String(), nil)
-	if err != nil {
-		return nil, nil, errors.Wrap(err, "Could not create http request")
-	}
-	req.Header.Set("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0")
+	var resp *http.Response
 
-	resp, err := hClient.Do(req)
-	if err != nil {
-		return nil, nil, errors.Wrap(err, "Could not get original url")
+	for _, userAgent := range userAgents {
+		req, err := http.NewRequest("GET", inUrl.String(), nil)
+		if err != nil {
+			return nil, nil, errors.Wrap(err, "Could not create http request")
+		}
+		if userAgent != "" {
+			req.Header.Set("User-Agent", userAgent)
+		}
+		resp, err = hClient.Do(req)
+		if err != nil {
+			return nil, nil, errors.Wrap(err, "Could not get original url")
+		}
+
+		if resp.Request.URL.String() != inUrl.String() {
+			break
+		}
 	}
 
 	baseBody := bytes.Buffer{}
