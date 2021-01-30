@@ -50,7 +50,7 @@ be up and running
 - `--local`: Use the assets (frontend & blacklist) directly from the filesystem instead of the internal binary storage. This helps during the development of the frontend as you do not have to do `go generate ./...` after every change. This should not be used in production. (Default: `false`)
 - `--blacklist-sources`:  Comma separated list of blacklist urls to periodically sync. The blacklist should be a list of newline separated domains (Default https://hosts.ubuntu101.co.za/domains.list)
 - `--sync`: Blacklist synchronization interval. The format is a number and a unit. For example `30m` or `1.5h`, available units are `"s", "m", "h"`. Mixed values are also possible: `XhXmXs` (Default: one hour)
-
+- `--support-url`: Url where the users of your unshort.link server can financially support you (e.g. paypal/patreon)
 ## Development
 ### How to run the unit tests
 Just run `go test ./...` from the command line.
