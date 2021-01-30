@@ -215,6 +215,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, che
 			handleApiError(rw, errors.Wrap(err, "Could not marshal json"))
 			return
 		}
+		rw.Header().Set("Content-type", "application/json")
 		_, _ = io.Copy(rw, bytes.NewReader(jsoRes))
 		return
 	}

@@ -57,6 +57,7 @@ func main() {
 			rw.Header().Set("Access-Control-Allow-Origin", "*")
 			rw.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
 			rw.Header().Set("Access-Control-Allow-Headers", "*")
+			rw.Header().Set("Content-type", "application/json")
 			handleProviders(rw)
 		case strings.HasPrefix(path, "/api/"):
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/api")
