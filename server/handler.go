@@ -160,9 +160,6 @@ func renderTemplate(rw io.Writer, templateBytes []byte, vars TemplateVars) error
 }
 
 func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, checkBlacklist bool, blacklistSource blacklistSource, supportUrl string) {
-	if !api {
-		renderLoading(rw)
-	}
 
 	baseUrl := strings.TrimPrefix(req.URL.String(), serveUrl)
 	baseUrl = schemeReplacer.Replace(baseUrl)
@@ -180,6 +177,13 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, che
 
 	//Check in DB
 	endUrl, err := db.GetUrlFromDB(myUrl)
+	if endUrl != nil && endUrl.LongUrl.String() != "" && endUrl.LongUrl == endUrl.ShortUrl {
+		http.Redirect(rw, req, endUrl.LongUrl.String(), http.StatusTemporaryRedirect)
+		return
+	}
+	if !api {
+		renderLoading(rw)
+	}
 	if err != nil {
 		logrus.Infof("Get new url from short link: '%s'", myUrl.String())
 
@@ -225,7 +229,7 @@ func handleUnShort(rw http.ResponseWriter, req *http.Request, redirect, api, che
 		return
 	}
 
-	handleShowRedirectPage(rw, endUrl, api, redirect, supportUrl)
+	handleShowRedirectPage(rw, endUrl, api, redirect || endUrl.LongUrl == endUrl.ShortUrl, supportUrl)
 }
 
 func handleProviders(rw http.ResponseWriter) {
