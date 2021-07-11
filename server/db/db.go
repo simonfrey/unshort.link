@@ -18,8 +18,16 @@ import (
 //go:generate esc -private -local-prefix-cwd -pkg=db -o=static.go standard_hosts.txt
 
 var db *sqlx.DB
-var providerBlacklist map[string]bool
+var providerBlacklist []string
 
+func inBlackList(host string) bool {
+	for _, providerSuffix := range providerBlacklist {
+		if strings.HasSuffix(host, providerSuffix) {
+			return true
+		}
+	}
+	return false
+}
 func init() {
 	var err error
 	db, err = sqlx.Connect("sqlite3", "file:link.db")
@@ -56,7 +64,7 @@ CREATE TABLE IF NOT EXISTS hosts (
 }
 
 func loadProviderBlacklist() {
-	providerBlacklist = map[string]bool{}
+	providerBlacklist = []string{}
 	var s *bufio.Scanner
 	if _, err := os.Stat("./provider_blacklist.txt"); os.IsNotExist(err) {
 		s = bufio.NewScanner(strings.NewReader(`google.com
@@ -75,8 +83,7 @@ unsplash.com`))
 		if s.Text() == "" {
 			continue
 		}
-		providerBlacklist[s.Text()] = true
-		providerBlacklist["www."+s.Text()] = true
+		providerBlacklist = append(providerBlacklist, s.Text())
 	}
 	err := s.Err()
 	if err != nil {
@@ -179,7 +186,7 @@ func GetHosts() ([]string, error) {
 
 	u := make([]string, 0, len(h))
 	for _, v := range h {
-		if _, ok := providerBlacklist[v.Name]; !ok {
+		if !inBlackList(v.Name) {
 			u = append(u, v.Name)
 		}
 	}
