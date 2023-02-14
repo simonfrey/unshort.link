@@ -1,5 +1,9 @@
 # Unshort.link
 
+
+# This project is archived. I decided to not continue working on it. All code is FOSS so you can take it and host your own servers. Also possible to configure your own server in the webextension. Thanks for all the years
+
+
 [💵 Please consider supporting this project to keep it up and running 💵](https://gum.co/unshortlink)
 
 
