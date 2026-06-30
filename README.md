@@ -1,5 +1,6 @@
 # This project is archived. I decided to not continue working on it. All code is FOSS so you can take it and host your own servers. Also possible to configure your own server in the webextension. Thanks for all the years
 
+Please be aware, that I am no longer owning the domain https://unshort.link/. It now hosts a url shortener, which is the exact oposite of what this projet was build for. DO NOT USE IT.
 
 ## Unshort.link
 
